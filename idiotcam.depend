@@ -1,0 +1,40 @@
+# depslib dependency file v1.0
+1499416081 source:d:\idiotcam\main.cpp
+	<iostream>
+	"include/RenderManager.h"
+
+1497439316 d:\idiotcam\include\transactionmanager.h
+	<GL/glew.h>
+	<GLFW/glfw3.h>
+	<cstdio>
+	<cstring>
+
+1497444786 source:h:\idiotcam\main.cpp
+	<iostream>
+	"include/TransactionManager.h"
+
+1497439316 h:\idiotcam\include\transactionmanager.h
+	<GL/glew.h>
+	<GLFW/glfw3.h>
+	<cstdio>
+	<cstring>
+
+1499402466 d:\idiotcam\include\rendermanager.h
+	"BaseManager.h"
+	"SceneManager.h"
+
+1499415454 d:\idiotcam\include\basemanager.h
+	<GL/glew.h>
+	<GLFW/glfw3.h>
+	<cstdio>
+	<cstring>
+	<vector>
+	<string>
+	<map>
+
+1499418497 d:\idiotcam\include\scenemanager.h
+	"Object.h"
+	"BaseManager.h"
+
+1499413268 d:\idiotcam\include\object.h
+
