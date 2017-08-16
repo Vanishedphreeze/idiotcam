@@ -29,7 +29,7 @@ protected:
             unsigned int        all;
         } flags;
     } m_Info;
-    public: GLFWwindow* window;
+    public: GLFWwindow* gameWindowHandle;
 
 
 public:
@@ -70,19 +70,19 @@ public:
         glfwWindowHint(GLFW_STEREO, m_Info.flags.stereo ? GL_TRUE : GL_FALSE);
 
 
-        window = glfwCreateWindow(m_Info.windowWidth, m_Info.windowHeight, m_Info.title, m_Info.flags.fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
-        if (!window) {
+        gameWindowHandle = glfwCreateWindow(m_Info.windowWidth, m_Info.windowHeight, m_Info.title, m_Info.flags.fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
+        if (!gameWindowHandle) {
             fprintf(stderr, "Failed to open window\n");
             return;
         }
 
 
-        glfwMakeContextCurrent(window);
-        glfwSetWindowTitle(window, m_Info.title);
+        glfwMakeContextCurrent(gameWindowHandle);
+        glfwSetWindowTitle(gameWindowHandle, m_Info.title);
 
         if (!m_Info.flags.cursor)
         {
-            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+            glfwSetInputMode(gameWindowHandle, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
         }
 
         // m_Info.flags.stereo = (glfwGetWindowParam(GLFW_STEREO) ? 1 : 0);
@@ -98,7 +98,7 @@ public:
     }
 
     void shutDown() override {
-        glfwDestroyWindow(window);
+        glfwDestroyWindow(gameWindowHandle);
         glfwTerminate();
     }
 };

@@ -1,6 +1,7 @@
 # depslib dependency file v1.0
-1499416081 source:d:\idiotcam\main.cpp
+1502885911 source:d:\idiotcam\main.cpp
 	<iostream>
+	<fstream>
 	"include/RenderManager.h"
 
 1497439316 d:\idiotcam\include\transactionmanager.h

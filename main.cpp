@@ -1,20 +1,31 @@
 #include <iostream>
+#include <fstream>
+//using namespace std;
 
 #include "include/RenderManager.h"
 
-// Shaders
-const GLchar* vertexShaderSource = "#version 430 core\n"
-    "layout (location = 0) in vec3 position;\n"
-    "void main()\n"
-    "{\n"
-    "gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
-    "}\0";
-const GLchar* fragmentShaderSource = "#version 430 core\n"
-    "out vec4 color;\n"
-    "void main()\n"
-    "{\n"
-    "color = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-    "}\n\0";
+GLchar* vertexShaderSource;
+GLchar* fragmentShaderSource;
+
+int loadshader (GLchar* &targetShader, const char* shaderFile) {
+    // this function is not finished yet.
+    // "try catch" is required.
+
+    // load shader files
+    std::filebuf *pbuf;
+    std::ifstream filestr;
+    int fileLength;
+
+    filestr.open (shaderFile, std::ios::binary);
+    pbuf=filestr.rdbuf();
+    fileLength=pbuf->pubseekoff(0, std::ios::end, std::ios::in);
+    pbuf->pubseekpos(0, std::ios::in);
+    targetShader=new char[fileLength + 1];
+    targetShader[fileLength] = '\0';
+    pbuf->sgetn (targetShader,fileLength);
+    filestr.close();
+    //std::cout.write (targetShader,fileLength);
+}
 
 int main() {
     //CameraObject haha;
@@ -32,7 +43,12 @@ int main() {
     ptr_Render->startUp();
     ptr_Scene->startUp();
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    loadshader(vertexShaderSource, "shaders/simpleVS.vert");
+    loadshader(fragmentShaderSource, "shaders/simpleFS.frag");
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Build and compile our shader program
     // Vertex shader
     GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -96,8 +112,8 @@ int main() {
 
     glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs)
 
-    // Game loop
-    while (true) {
+    // Gameloop
+    while (!glfwWindowShouldClose(ptr_Render->gameWindowHandle)) {
         // Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
         glfwPollEvents();
 
@@ -113,7 +129,7 @@ int main() {
         glBindVertexArray(0);
 
         // Swap the screen buffers
-        glfwSwapBuffers(ptr_Render->window);
+        glfwSwapBuffers(ptr_Render->gameWindowHandle);
     }
     // Properly de-allocate all resources once they've outlived their purpose
     glDeleteVertexArrays(1, &VAO);
@@ -134,4 +150,3 @@ int main() {
     delete ptr_Render;
     return 0;
 }
-// this is a test.
