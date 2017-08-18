@@ -44,12 +44,14 @@ int main() {
     ptr_Scene->startUp();
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // load shader
 
     loadshader(vertexShaderSource, "shaders/simpleVS.vert");
     loadshader(fragmentShaderSource, "shaders/simpleFS.frag");
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Build and compile our shader program
+
+    // Build and compile shader
     // Vertex shader
     GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
@@ -91,10 +93,12 @@ int main() {
 
     // Set up vertex data (and buffer(s)) and attribute pointers
     GLfloat vertices[] = {
-         0.5f,  0.5f, 0.0f,
         -0.5f,  0.5f, 0.0f,
+         0.5f,  0.5f, 0.0f,
          0.5f, -0.5f, 0.0f,
-        -0.5f, -0.5f, 0.0f
+        -0.5f, -0.5f, 0.0f,
+        -0.5f,  0.5f, 0.0f,
+         0.5f, -0.5f, 0.0f
     };
     GLuint VBO, VAO;
     glGenVertexArrays(1, &VAO);
@@ -112,6 +116,11 @@ int main() {
 
     glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs)
 
+
+
+
+
+
     // Gameloop
     while (!glfwWindowShouldClose(ptr_Render->gameWindowHandle)) {
         // Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
@@ -125,7 +134,9 @@ int main() {
         // Draw our first triangle
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4); // why not triangle_fan?
+        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+        //glDrawArrays(GL_LINE_STRIP, 0, 6);
+
         glBindVertexArray(0);
 
         // Swap the screen buffers
