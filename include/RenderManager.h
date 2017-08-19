@@ -1,4 +1,4 @@
-// Because of an unknown problem, m_Info.flag.stereo should be 0.
+// Because of an unknown problem, mInfo.flag.stereo should be 0.
 
 #pragma once
 
@@ -7,17 +7,19 @@
 #define WINDOW_HEIGHT 600
 
 #include "BaseManager.h"
-#include "SceneManager.h"
+#include "ShaderProgram.h"
+
 
 class RenderManager : public BaseManager {
-protected:
+private:
+    GLuint mVBO, mVAO;
     struct APPINFO {
         char title[128];
         int windowWidth;
         int windowHeight;
         int majorVersion = 4;
         int minorVersion = 3;
-        int samples;
+        int samples = 1;
         union {
             struct {
                 unsigned int    fullscreen  : 1;
@@ -28,77 +30,125 @@ protected:
             };
             unsigned int        all;
         } flags;
-    } m_Info;
-    public: GLFWwindow* gameWindowHandle;
+    } mInfo;
 
+    void setupVertexBuffer(); // in a 2D game engine, the only shape we will use is rectangular.
+    std::vector<ShaderProgram*> mShaderProgramPool;
 
 public:
+    GLFWwindow* gameWindowHandle;
+
     RenderManager() {};
     ~RenderManager() {};
-
-    void startUp() override {
-
-        m_Info.flags.all = 22;
-        /*
-        m_Info.flags.fullscreen=0;
-        m_Info.flags.vsync=1;
-        m_Info.flags.cursor=1;
-        m_Info.flags.stereo=0;
-        m_Info.flags.debug=1;
-        */
-
-        if (!glfwInit())
-        {
-            fprintf(stderr, "Failed to initialize GLFW\n");
-            return;
-        }
-        //printf("%d\n",m_Info.majorVersion);
-
-        strcpy(m_Info.title, TITLE);
-        m_Info.windowWidth = WINDOW_WIDTH;
-        m_Info.windowHeight = WINDOW_HEIGHT;
-
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, m_Info.majorVersion);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, m_Info.minorVersion);
-
-#ifdef _DEBUG
-        glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
-#endif /* _DEBUG */
-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-        glfwWindowHint(GLFW_SAMPLES, m_Info.samples);
-        glfwWindowHint(GLFW_STEREO, m_Info.flags.stereo ? GL_TRUE : GL_FALSE);
-
-
-        gameWindowHandle = glfwCreateWindow(m_Info.windowWidth, m_Info.windowHeight, m_Info.title, m_Info.flags.fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
-        if (!gameWindowHandle) {
-            fprintf(stderr, "Failed to open window\n");
-            return;
-        }
-
-
-        glfwMakeContextCurrent(gameWindowHandle);
-        glfwSetWindowTitle(gameWindowHandle, m_Info.title);
-
-        if (!m_Info.flags.cursor)
-        {
-            glfwSetInputMode(gameWindowHandle, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-        }
-
-        // m_Info.flags.stereo = (glfwGetWindowParam(GLFW_STEREO) ? 1 : 0);
-
-        glewInit();
-
-#ifdef _DEBUG
-        fprintf(stderr, "VENDOR: %s\n", (char *)glGetString(GL_VENDOR));
-        fprintf(stderr, "VERSION: %s\n", (char *)glGetString(GL_VERSION));
-        fprintf(stderr, "RENDERER: %s\n", (char *)glGetString(GL_RENDERER));
-#endif
-
-    }
-
-    void shutDown() override {
-        glfwDestroyWindow(gameWindowHandle);
-        glfwTerminate();
-    }
+    void startUp() override;
+    void shutDown() override;
+    void draw(); // this function would be drawRenderQueue sooner.
 };
+
+
+
+
+
+
+void RenderManager::setupVertexBuffer() {
+    // Set up vertex data (and buffer(s)) and attribute pointers
+    GLfloat vertices[] = {
+        -0.5f,  0.5f, 0.0f,
+         0.5f,  0.5f, 0.0f,
+         0.5f, -0.5f, 0.0f,
+        -0.5f, -0.5f, 0.0f
+    };
+    glGenVertexArrays(1, &mVAO);
+    glGenBuffers(1, &mVBO);
+    // Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
+    glBindVertexArray(mVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, mVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
+    glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs)
+}
+
+
+void RenderManager::startUp() {
+
+    mInfo.flags.all = 22;
+
+    // that is equal to
+    /*
+    mInfo.flags.fullscreen=0;
+    mInfo.flags.vsync=1;
+    mInfo.flags.cursor=1;
+    mInfo.flags.stereo=0;
+    mInfo.flags.debug=1;
+    */
+
+    if (!glfwInit()) {
+        fprintf(stderr, "Failed to initialize GLFW\n");
+        return;
+    }
+
+    strcpy(mInfo.title, TITLE);
+    mInfo.windowWidth = WINDOW_WIDTH;
+    mInfo.windowHeight = WINDOW_HEIGHT;
+
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, mInfo.majorVersion);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, mInfo.minorVersion);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_SAMPLES, mInfo.samples);
+    glfwWindowHint(GLFW_STEREO, mInfo.flags.stereo ? GL_TRUE : GL_FALSE);
+
+    gameWindowHandle = glfwCreateWindow(mInfo.windowWidth, mInfo.windowHeight, mInfo.title, mInfo.flags.fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
+    if (gameWindowHandle == NULL) {
+        fprintf(stderr, "Failed to open window\n");
+        return;
+    }
+
+    glfwMakeContextCurrent(gameWindowHandle);
+    glfwSetWindowTitle(gameWindowHandle, mInfo.title);
+
+    if (!mInfo.flags.cursor) {
+        glfwSetInputMode(gameWindowHandle, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+    }
+
+    glewInit();
+    setupVertexBuffer();
+
+    ShaderProgram* simpleShader = new ShaderProgram("shaders/simpleVS.vert", "shaders/simpleFS.frag");
+    mShaderProgramPool.push_back(simpleShader);
+}
+
+
+void RenderManager::shutDown() {
+    // Properly de-allocate all resources once they've outlived their purpose
+    glDeleteVertexArrays(1, &mVAO);
+    glDeleteBuffers(1, &mVBO);
+
+    // Terminate GLFW, clearing any resources allocated by GLFW.
+    glfwDestroyWindow(gameWindowHandle);
+    glfwTerminate();
+}
+
+
+void RenderManager::draw() {
+    // use glPolygonMode(GL_FRONT_AND_BACK, GL_LINE) to draw wire frame.
+    // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL) to set as default.
+
+    // Render
+    // Clear the colorbuffer
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    // Draw our first triangle
+    (mShaderProgramPool[0])->activate();
+    //glUseProgram(shaderProgram);
+    glBindVertexArray(mVAO);
+    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+
+    glBindVertexArray(0);
+
+    // Swap the screen buffers
+    glfwSwapBuffers(gameWindowHandle);
+}

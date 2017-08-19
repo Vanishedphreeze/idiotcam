@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1502885911 source:d:\idiotcam\main.cpp
+1503137653 source:d:\idiotcam\main.cpp
 	<iostream>
 	<fstream>
 	"include/RenderManager.h"
@@ -20,11 +20,11 @@
 	<cstdio>
 	<cstring>
 
-1499402466 d:\idiotcam\include\rendermanager.h
+1503137539 d:\idiotcam\include\rendermanager.h
 	"BaseManager.h"
-	"SceneManager.h"
+	"ShaderProgram.h"
 
-1499415454 d:\idiotcam\include\basemanager.h
+1503135051 d:\idiotcam\include\basemanager.h
 	<GL/glew.h>
 	<GLFW/glfw3.h>
 	<cstdio>
@@ -38,4 +38,6 @@
 	"BaseManager.h"
 
 1499413268 d:\idiotcam\include\object.h
+
+1503135337 d:\idiotcam\include\shaderprogram.h
 

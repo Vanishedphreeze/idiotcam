@@ -32,9 +32,8 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="include/BaseManager.h" />
-		<Unit filename="include/Object.h" />
 		<Unit filename="include/RenderManager.h" />
-		<Unit filename="include/SceneManager.h" />
+		<Unit filename="include/ShaderProgram.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

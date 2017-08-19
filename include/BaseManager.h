@@ -19,6 +19,6 @@ class BaseManager {
 public:
     BaseManager() {}
     virtual ~BaseManager() {}
-    virtual void startUp()=0;
-    virtual void shutDown()=0;
+    virtual void startUp() = 0;
+    virtual void shutDown() = 0;
 };
