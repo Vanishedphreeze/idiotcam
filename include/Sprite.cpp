@@ -4,13 +4,17 @@
 Sprite::Sprite() {
     mColor << 1, 1, 1, 1;
     this->pShaderProgram = gRenderManager.getDefaultShader();
-    gRenderManager.addSpriteToRenderQueue(this);
+    mIndex = gRenderManager.addSpriteToRenderQueue(this);
 }
 
-Sprite::Sprite (ShaderProgram* pShaderProgram) {
+Sprite::Sprite(ShaderProgram* pShaderProgram) {
     mColor << 1, 1, 1, 1;
     this->pShaderProgram = pShaderProgram;
-    gRenderManager.addSpriteToRenderQueue(this);
+    mIndex = gRenderManager.addSpriteToRenderQueue(this);
+}
+
+Sprite::~Sprite() {
+    gRenderManager.removeSpriteFromRenderQueue(mIndex);
 }
 
 void Sprite::draw() {

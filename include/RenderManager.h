@@ -37,9 +37,10 @@ private:
         } flags;
     } mInfo;
 
+    int mSpriteIndexCounter = 0;
     void setupVertexBuffer(); // in a 2D game engine, the only shape we will use is rectangular.
     std::vector<ShaderProgram*> mShaderProgramPool; // this will create tons of dangling pointers. Be careful.
-    std::vector<Sprite*> mRenderQueue; // this would be a map sooner.
+    std::map<int, Sprite*> mRenderQueue;
 
 public:
     RenderManager() {};
@@ -48,7 +49,8 @@ public:
     void shutDown() override;
     GLFWwindow* getWindowHandle();
     ShaderProgram* getDefaultShader(); // this function should be in getDefaultResources
-    void addSpriteToRenderQueue(Sprite*);
+    int addSpriteToRenderQueue(Sprite* sprite);
+    void removeSpriteFromRenderQueue(int index);
     void draw(); // this function would be drawRenderQueue sooner.
 };
 

@@ -90,8 +90,13 @@ ShaderProgram* RenderManager::getDefaultShader() {
     return mShaderProgramPool[0];
 }
 
-void RenderManager::addSpriteToRenderQueue(Sprite* sprite) {
-    mRenderQueue.push_back(sprite);
+int RenderManager::addSpriteToRenderQueue(Sprite* sprite) {
+    mRenderQueue.insert(std::pair<int, Sprite*> (mSpriteIndexCounter, sprite));
+    return mSpriteIndexCounter++;
+}
+
+void RenderManager::removeSpriteFromRenderQueue(int index) {
+    mRenderQueue.erase(index);
 }
 
 void RenderManager::draw() {
@@ -110,14 +115,13 @@ void RenderManager::draw() {
     glBindVertexArray(mVAO);
     //(mShaderProgramPool[0])->activate(); // pre-ordered optimize. if the shader program is the same as the former one, then THIS is not necessary.
     //glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
-    for (int i=0; i<mRenderQueue.size(); i++) {
-        (mRenderQueue[i])->draw();
+    for (auto i=mRenderQueue.begin(); i!=mRenderQueue.end(); ++i) {
+        (*i).second->draw();
     }
     glBindVertexArray(0);
 
     // Swap the screen buffers
     glfwSwapBuffers(mGameWindowHandle);
 }
-
 
 RenderManager gRenderManager;

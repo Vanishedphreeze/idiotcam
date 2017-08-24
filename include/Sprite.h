@@ -23,18 +23,21 @@
 #endif // STDLIBRARIES
 
 class RenderManager;
+
 extern RenderManager gRenderManager;
 
 class Sprite {
 private:
     ShaderProgram *pShaderProgram;
     Eigen::Vector4f mColor;
+    int mIndex;
     bool mVisible = true;
 
 public:
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW // this is pretty annoying.
     Sprite();
     Sprite(ShaderProgram* pShaderProgram);
+    ~Sprite();
     void draw();
     void setColor(Eigen::Vector4f color);
     void setColor(float r, float g, float b, float a);

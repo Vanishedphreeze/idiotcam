@@ -19,7 +19,7 @@
 	<cstdio>
 	<cstring>
 
-1503540546 d:\idiotcam\include\rendermanager.h
+1503578546 d:\idiotcam\include\rendermanager.h
 	"BaseManager.h"
 	"ShaderProgram.h"
 	"Sprite.h"
@@ -52,16 +52,16 @@
 	<string>
 	<map>
 
-1503540387 source:d:\idiotcam\include\rendermanager.cpp
+1503578446 source:d:\idiotcam\include\rendermanager.cpp
 	"RenderManager.h"
 
 1503536813 source:d:\idiotcam\include\shaderprogram.cpp
 	"ShaderProgram.h"
 
-1503543277 source:d:\idiotcam\include\sprite.cpp
+1503578446 source:d:\idiotcam\include\sprite.cpp
 	"Sprite.h"
 
-1503543261 d:\idiotcam\include\sprite.h
+1503578446 d:\idiotcam\include\sprite.h
 	"ShaderProgram.h"
 	"RenderManager.h"
 	<Eigen/Eigen>
