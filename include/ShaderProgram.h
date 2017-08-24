@@ -1,92 +1,37 @@
+#ifndef _SHADERPROGRAM
+#define _SHADERPROGRAM
+
 #pragma once
+
+#ifndef GLEW_BUILD
+    #define GLEW_BUILD
+    #include <GL/glew.h>
+    #include <GLFW/glfw3.h>
+#endif // GLEW_BUILD
+
+#ifndef STDLIBRARIES
+    #define STDLIBRARIES
+    #include <iostream>
+    #include <fstream>
+    #include <cstdio>
+    #include <cstring>
+    #include <vector>
+    #include <string>
+    #include <map>
+#endif // STDLIBRARIES
 
 class ShaderProgram {
 private:
-    GLuint mCompiledShader;
+    GLuint mShaderProgramLocation;
 
     void loadAndCompileShader(GLuint &targetShader, const char* shaderFile, const GLuint shaderType);
 
 public:
     ShaderProgram(const char* vertexShaderFile, const char* fragmentShaderFile);
     void activate();
+    GLuint getShaderProgramLocation();
 };
 
-
-
-
-
-
-void ShaderProgram::loadAndCompileShader (GLuint &targetShader, const char* shaderFile, const GLuint shaderType) {
-    // this function is used to load shader from a shader file and compile it.
-    // shaderType could be GL_VERTEX_SHADER or GL_FRAGMENT_SHADER
-
-    // load shader files
-    std::filebuf *pbuf;
-    std::ifstream filestr;
-    int fileLength;
-    GLchar* buffer;
-
-    // load the shader file into a buffer
-    filestr.open(shaderFile, std::ios::binary);
-    if (!filestr) {
-        std::cout << "ERROR: File \"" << shaderFile << "\" not found \n" << std::endl;
-        return;
-    }
-    pbuf=filestr.rdbuf();
-    fileLength = pbuf->pubseekoff(0, std::ios::end, std::ios::in);
-    pbuf->pubseekpos(0, std::ios::in);
-    buffer = new char[fileLength + 1];
-    buffer[fileLength] = '\0';
-    pbuf->sgetn (buffer, fileLength);
-    filestr.close();
-
-    // compile the shader
-    targetShader = glCreateShader(shaderType);
-    glShaderSource(targetShader, 1, &buffer, NULL);
-    glCompileShader(targetShader);
-
-    // Check for compile time errors
-    GLint success;
-    GLchar infoLog[512];
-    glGetShaderiv(targetShader, GL_COMPILE_STATUS, &success);
-    if (!success) {
-        glGetShaderInfoLog(targetShader, 512, NULL, infoLog);
-        std::cout << "ERROR: Failed to compile \"" << shaderFile << "\" \n" << infoLog << std::endl;
-    }
-}
-
-
-ShaderProgram::ShaderProgram (const char* vertexShaderFile, const char* fragmentShaderFile) {
-    // Build and compile shader
-    // Vertex shader
-    GLuint vertexShader;
-    loadAndCompileShader(vertexShader, vertexShaderFile, GL_VERTEX_SHADER);
-
-    // Fragment shader
-    GLuint fragmentShader;
-    loadAndCompileShader(fragmentShader, fragmentShaderFile, GL_FRAGMENT_SHADER);
-
-    // Link shaders
-    mCompiledShader = glCreateProgram();
-    glAttachShader(mCompiledShader, vertexShader);
-    glAttachShader(mCompiledShader, fragmentShader);
-    glLinkProgram(mCompiledShader);
-    // Check for linking errors
-    GLint success;
-    GLchar infoLog[512];
-    glGetProgramiv(mCompiledShader, GL_LINK_STATUS, &success);
-    if (!success) {
-        glGetProgramInfoLog(mCompiledShader, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
-    }
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
-}
-
-
-void ShaderProgram::activate() {
-    glUseProgram(mCompiledShader);
-}
-
+#endif // _SHADERPROGRAM
 
 

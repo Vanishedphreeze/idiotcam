@@ -8,12 +8,15 @@
 
 #ifndef STDLIBRARIES
     #define STDLIBRARIES
-    #include<cstdio>
-    #include<cstring>
-    #include<vector>
-    #include<string>
-    #include<map>
+    #include <iostream>
+    #include <fstream>
+    #include <cstdio>
+    #include <cstring>
+    #include <vector>
+    #include <string>
+    #include <map>
 #endif // STDLIBRARIES
+
 
 class BaseManager {
 public:

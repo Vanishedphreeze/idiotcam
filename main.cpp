@@ -1,18 +1,20 @@
-#include <iostream>
-#include <fstream>
-
 #include "include/RenderManager.h"
+#include "include/Sprite.h"
 
-// use a priority queue to initialize managers
-RenderManager gRenderManager;
+extern RenderManager gRenderManager;
 
 int main() {
     gRenderManager.startUp();
 
+    Sprite* testSprite = new Sprite(gRenderManager.getDefaultShader());
+    Eigen::Vector4f color;
+    color << 1, 0, 0, 0;
+
     // Gameloop
-    while (!glfwWindowShouldClose(gRenderManager.gameWindowHandle)) {
+    while (!glfwWindowShouldClose(gRenderManager.getWindowHandle())) {
         // Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
         glfwPollEvents();
+        testSprite->setColor(color);
         gRenderManager.draw();
     }
 

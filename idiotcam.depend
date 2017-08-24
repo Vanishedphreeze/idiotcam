@@ -1,8 +1,7 @@
 # depslib dependency file v1.0
-1503137653 source:d:\idiotcam\main.cpp
-	<iostream>
-	<fstream>
+1503541045 source:d:\idiotcam\main.cpp
 	"include/RenderManager.h"
+	"include/Sprite.h"
 
 1497439316 d:\idiotcam\include\transactionmanager.h
 	<GL/glew.h>
@@ -20,13 +19,16 @@
 	<cstdio>
 	<cstring>
 
-1503137539 d:\idiotcam\include\rendermanager.h
+1503540546 d:\idiotcam\include\rendermanager.h
 	"BaseManager.h"
 	"ShaderProgram.h"
+	"Sprite.h"
 
-1503135051 d:\idiotcam\include\basemanager.h
+1503485800 d:\idiotcam\include\basemanager.h
 	<GL/glew.h>
 	<GLFW/glfw3.h>
+	<iostream>
+	<fstream>
 	<cstdio>
 	<cstring>
 	<vector>
@@ -39,5 +41,38 @@
 
 1499413268 d:\idiotcam\include\object.h
 
-1503135337 d:\idiotcam\include\shaderprogram.h
+1503496524 d:\idiotcam\include\shaderprogram.h
+	<GL/glew.h>
+	<GLFW/glfw3.h>
+	<iostream>
+	<fstream>
+	<cstdio>
+	<cstring>
+	<vector>
+	<string>
+	<map>
+
+1503540387 source:d:\idiotcam\include\rendermanager.cpp
+	"RenderManager.h"
+
+1503536813 source:d:\idiotcam\include\shaderprogram.cpp
+	"ShaderProgram.h"
+
+1503543277 source:d:\idiotcam\include\sprite.cpp
+	"Sprite.h"
+
+1503543261 d:\idiotcam\include\sprite.h
+	"ShaderProgram.h"
+	"RenderManager.h"
+	<Eigen/Eigen>
+	<iostream>
+	<fstream>
+	<cstdio>
+	<cstring>
+	<vector>
+	<string>
+	<map>
+
+1503497403 d:\idiotcam\include\predeclare.h
+	"RenderManager.h"
 

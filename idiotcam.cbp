@@ -32,8 +32,13 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="include/BaseManager.h" />
+		<Unit filename="include/Predeclare.h" />
+		<Unit filename="include/RenderManager.cpp" />
 		<Unit filename="include/RenderManager.h" />
+		<Unit filename="include/ShaderProgram.cpp" />
 		<Unit filename="include/ShaderProgram.h" />
+		<Unit filename="include/Sprite.cpp" />
+		<Unit filename="include/Sprite.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
