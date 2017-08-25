@@ -46,6 +46,7 @@ void RenderManager::startUp() {
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, mInfo.majorVersion);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, mInfo.minorVersion);
+    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_SAMPLES, mInfo.samples);
