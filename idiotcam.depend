@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1503666691 source:d:\idiotcam\main.cpp
+1503750949 source:d:\idiotcam\main.cpp
 	"include/RenderManager.h"
 	"include/Sprite.h"
 
@@ -52,16 +52,16 @@
 	<string>
 	<map>
 
-1503654913 source:d:\idiotcam\include\rendermanager.cpp
+1503715946 source:d:\idiotcam\include\rendermanager.cpp
 	"RenderManager.h"
 
 1503536813 source:d:\idiotcam\include\shaderprogram.cpp
 	"ShaderProgram.h"
 
-1503669401 source:d:\idiotcam\include\sprite.cpp
+1503754838 source:d:\idiotcam\include\sprite.cpp
 	"Sprite.h"
 
-1503669392 d:\idiotcam\include\sprite.h
+1503714987 d:\idiotcam\include\sprite.h
 	"ShaderProgram.h"
 	"RenderManager.h"
 	<Eigen/Eigen>
@@ -75,4 +75,6 @@
 
 1503497403 d:\idiotcam\include\predeclare.h
 	"RenderManager.h"
+
+1503754967 source:d:\idiotcam\camera.cpp
 

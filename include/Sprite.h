@@ -42,13 +42,23 @@ public:
     Sprite();
     Sprite(ShaderProgram* pShaderProgram);
     ~Sprite();
+    void _spriteConstructor();
     void draw();
     void setColor(Eigen::Vector4f color);
     void setColor(float r, float g, float b, float a);
+    Eigen::Vector4f getColor() const;
     void setPos(Eigen::Vector3f pos);
     void setPos(float x, float y, float z);
+    void incPos(Eigen::Vector3f dPos);
+    void incPos(float dx, float dy, float dz);
+    Eigen::Vector3f getPos() const;
     void setScale(float width, float height);
+    void incScale(float dWidth, float dHeight);
+    float getWidth() const;
+    float getHeight() const;
     void setAngleByRad(float rad);
+    void incAngleByRad(float dRad);
+    float getAngleByRad() const;
     Eigen::Matrix4f getTransformMatrix();
 };
 

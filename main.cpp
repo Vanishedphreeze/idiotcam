@@ -17,14 +17,12 @@ int main() {
     redsq->setColor(1, 0, 0, 0);
     yellowsq->setColor(1, 1, 0, 0);
 
-    //std::cout << rot4 << std::endl;
-
-    redsq->setPos(0.5, 0.5, 0);
-    redsq->setScale(1.5, 0.5);
+    redsq->setPos(45, 5, 0);
+    redsq->setScale(10, 15);
     redsq->setAngleByRad(PI / 6);
 
-    yellowsq->setPos(-0.7, -0.7, 0);
-    yellowsq->setScale(1.3, 1.3);
+    yellowsq->setPos(20, 30, 0);
+    yellowsq->setScale(12, 12);
     yellowsq->setAngleByRad(PI / 4);
 
     // Gameloop
