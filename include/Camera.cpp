@@ -3,23 +3,27 @@
 Camera::Camera(Eigen::Vector3f eyepos, float wcwidth) {
     mWCEyePos = eyepos;
     mWCWidth = wcwidth;
-    _initialize();
+    mBgColor << 0.8, 0.8, 0.8, 1.0;
+    _setupViewport();
 }
 
 Camera::Camera(float xEye, float yEye, float zEye, float wcwidth) {
     mWCEyePos << xEye, yEye, zEye;
     mWCWidth = wcwidth;
-    _initialize();
+    mBgColor << 0.8, 0.8, 0.8, 1.0;
+    _setupViewport();
 }
 
-void Camera::_initialize() {
-    mBgColor << 0.8, 0.8, 0.8, 1.0;
-//    glViewport(mViewportXPos, mViewportYPos, mViewportWidth, mViewportHeight);
-//    glScissor(mViewportXPos, mViewportYPos, mViewportWidth, mViewportHeight);
-//    glClearColor(mBgColor(0), mBgColor(1), mBgColor(2), mBgColor(3));
-//    glEnable(GL_SCISSOR_TEST);
-//    glClear(GL_COLOR_BUFFER_BIT);
-//    glDisable(GL_SCISSOR_TEST);
+void Camera::_setupViewport() {
+    glViewport(mViewportXPos, mViewportYPos, mViewportWidth, mViewportHeight);
+    glScissor(mViewportXPos, mViewportYPos, mViewportWidth, mViewportHeight);
+}
+
+void Camera::clearCamera() {
+    glClearColor(mBgColor(0), mBgColor(1), mBgColor(2), mBgColor(3));
+    glEnable(GL_SCISSOR_TEST);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glDisable(GL_SCISSOR_TEST);
 }
 
 Camera::~Camera() {}
@@ -85,6 +89,7 @@ float Camera::getWCHeight() const {
 void Camera::setViewport(int x, int y, int width, int height) {
     mViewportXPos = x, mViewportYPos = y;
     mViewportWidth = width, mViewportHeight = height;
+    _setupViewport();
 }
 
 Eigen::Vector4i Camera::getViewportInfo() const {

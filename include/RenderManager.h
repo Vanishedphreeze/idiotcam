@@ -54,6 +54,7 @@ public:
     ShaderProgram* getDefaultShader() const; // this function should be in getDefaultResources
     Camera* getDefaultCamera() const;
     int addSpriteToRenderQueue(Sprite* sprite);
+    void clearWindow();
     void removeSpriteFromRenderQueue(int index);
     void draw(); // this function would be drawRenderQueue sooner.
 };

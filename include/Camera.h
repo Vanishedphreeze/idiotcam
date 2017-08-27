@@ -26,13 +26,16 @@ private:
     int mViewportWidth = WINDOW_WIDTH, mViewportHeight = WINDOW_HEIGHT;
     Eigen::Vector4f mBgColor;
     bool mIsActive = true;
-    void _initialize();
+    void _setupViewport();
+
 
 public:
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     Camera(Eigen::Vector3f eyepos, float wcwidth);
     Camera(float xEye, float yEye, float zEye, float wcwidth);
     ~Camera();
+
+    void clearCamera();
 
     void setBgColor(Eigen::Vector4f color);
     void setBgColor(float r, float g, float b, float a);

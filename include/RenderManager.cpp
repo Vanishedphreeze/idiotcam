@@ -106,14 +106,19 @@ void RenderManager::removeSpriteFromRenderQueue(int index) {
     mRenderQueue.erase(index);
 }
 
+void RenderManager::clearWindow() {
+    glClearColor(0.7f, 0.7f, 0.7f, 1.0f); // set the background to light gray.
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
 void RenderManager::draw() {
     // use glPolygonMode(GL_FRONT_AND_BACK, GL_LINE) to draw wire frame.
     // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL) to set as default.
 
     // Render
     // Clear the colorbuffer
-    glClearColor(0.8f, 0.8f, 0.8f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    clearWindow();
+    (getDefaultCamera())->clearCamera();
 
     // what will happen if i don't unbind the VAO after draw?
 
@@ -121,7 +126,7 @@ void RenderManager::draw() {
     glBindVertexArray(mVAO);
     //(mShaderProgramPool[0])->activate(); // Optimize. if the shader program is the same as the former one, then THIS is not necessary.
     for (auto i=mRenderQueue.begin(); i!=mRenderQueue.end(); ++i) {
-        (*i).second->draw();
+        if ((*i).second->getVisibility()) (*i).second->draw();
     }
     glBindVertexArray(0);
 

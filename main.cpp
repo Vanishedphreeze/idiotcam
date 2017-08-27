@@ -25,6 +25,10 @@ int main() {
     yellowsq->setScale(30, 30);
     yellowsq->setAngleByRad(PI / 4);
 
+    Camera* cam = gRenderManager.getDefaultCamera();
+    cam->setBgColor(0, 1, 0, 1);
+    cam->setViewport(112, 84, 800, 600);
+
     // Gameloop
     while (!glfwWindowShouldClose(gRenderManager.getWindowHandle())) {
         // Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
