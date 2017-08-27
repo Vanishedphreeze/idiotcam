@@ -70,6 +70,8 @@ void RenderManager::startUp() {
 
     ShaderProgram* simpleShader = new ShaderProgram("shaders/simpleVS.vert", "shaders/simpleFS.frag");
     mShaderProgramPool.push_back(simpleShader);
+
+    mDefaultCam = new Camera(0, 0, 1, 100);
 }
 
 
@@ -83,12 +85,16 @@ void RenderManager::shutDown() {
     glfwTerminate();
 }
 
-GLFWwindow* RenderManager::getWindowHandle() {
+GLFWwindow* RenderManager::getWindowHandle() const {
     return mGameWindowHandle;
 }
 
-ShaderProgram* RenderManager::getDefaultShader() {
+ShaderProgram* RenderManager::getDefaultShader() const {
     return mShaderProgramPool[0];
+}
+
+Camera* RenderManager::getDefaultCamera() const {
+    return mDefaultCam;
 }
 
 int RenderManager::addSpriteToRenderQueue(Sprite* sprite) {

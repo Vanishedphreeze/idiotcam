@@ -31,8 +31,8 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Camera.cpp" />
 		<Unit filename="include/BaseManager.h" />
+		<Unit filename="include/Camera.cpp" />
 		<Unit filename="include/Camera.h" />
 		<Unit filename="include/Predeclare.h" />
 		<Unit filename="include/RenderManager.cpp" />

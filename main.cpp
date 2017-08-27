@@ -17,12 +17,12 @@ int main() {
     redsq->setColor(1, 0, 0, 0);
     yellowsq->setColor(1, 1, 0, 0);
 
-    redsq->setPos(45, 5, 0);
-    redsq->setScale(10, 15);
+    redsq->setPos(-15, -5, 0);
+    redsq->setScale(25, 40);
     redsq->setAngleByRad(PI / 6);
 
-    yellowsq->setPos(20, 30, 0);
-    yellowsq->setScale(12, 12);
+    yellowsq->setPos(20, 10, 0);
+    yellowsq->setScale(30, 30);
     yellowsq->setAngleByRad(PI / 4);
 
     // Gameloop

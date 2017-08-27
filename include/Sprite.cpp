@@ -25,24 +25,7 @@ Sprite::~Sprite() {
 
 void Sprite::draw() {
     pShaderProgram->activate();
-
-    ///////////////////////////////////////////////////
-    float znear = 1.0, zfar = -1.0;
-    float W = 100, pixelW = 1024, pixelH = 768, posx = 10, posy = 5;
-    float H = (W / pixelW) * pixelH;
-
-    Eigen::Matrix4f transV;
-    transV.setIdentity();
-    transV.block<3, 1>(0, 3) << -posx, -posy, 0;
-
-
-    Eigen::Matrix4f View = transV;
-    Eigen::Matrix4f Proj;
-    Proj << 2.0 / W,     0.0,                   0.0,                              0.0,
-                0.0, 2.0 / H,                   0.0,                              0.0,
-                0.0,     0.0, -2.0 / (zfar - znear), -(zfar + znear) / (zfar - znear),
-                0.0,     0.0,                   0.0,                              1.0;
-    ///////////////////////////////////////////////////
+    Camera* curCam = gRenderManager.getDefaultCamera();
 
     GLint colorLocation = glGetUniformLocation(pShaderProgram->getShaderProgramLocation(), "uPixelColor");
     GLint matrixLocation = glGetUniformLocation(pShaderProgram->getShaderProgramLocation(), "uModelTransform");
@@ -50,8 +33,8 @@ void Sprite::draw() {
     GLint PLocation = glGetUniformLocation(pShaderProgram->getShaderProgramLocation(), "uProjectTransform");
     glUniform4f(colorLocation, mColor(0), mColor(1), mColor(2), mColor(3));
     glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, getTransformMatrix().data());
-    glUniformMatrix4fv(VLocation, 1, GL_FALSE, View.data());
-    glUniformMatrix4fv(PLocation, 1, GL_FALSE, Proj.data());
+    glUniformMatrix4fv(VLocation, 1, GL_FALSE, curCam->getViewMatrix().data());
+    glUniformMatrix4fv(PLocation, 1, GL_FALSE, curCam->getProjMatrix().data());
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
     //Eigen::Vector4f pos4;
@@ -126,23 +109,31 @@ float Sprite::getAngleByRad() const {
     return mRotateRad;
 }
 
+void Sprite::setVisibility(bool flag) {
+    mVisible = flag;
+}
+
+bool Sprite::getVisibility() const {
+    return mVisible;
+}
+
 Eigen::Matrix4f Sprite::getTransformMatrix() {
     // translate
-    Eigen::Matrix4f trans4;
-    trans4.setIdentity();
-    trans4.block<3, 1>(0, 3) = mPos;
+    Eigen::Matrix4f trans;
+    trans.setIdentity();
+    trans.block<3, 1>(0, 3) = mPos;
 
     // rotate
-    Eigen::Matrix4f rot4;
-    rot4.setIdentity();
-    rot4.block<2, 2>(0, 0) << cos(mRotateRad), -sin(mRotateRad), sin(mRotateRad), cos(mRotateRad);
+    Eigen::Matrix4f rot;
+    rot.setIdentity();
+    rot.block<2, 2>(0, 0) << cos(mRotateRad), -sin(mRotateRad), sin(mRotateRad), cos(mRotateRad);
 
     // scale
-    Eigen::Matrix4f scale4;
-    scale4.setIdentity();
-    scale4.block<2, 2>(0, 0) << mWidth, 0.0, 0.0, mHeight;
+    Eigen::Matrix4f scale;
+    scale.setIdentity();
+    scale.block<2, 2>(0, 0) << mWidth, 0.0, 0.0, mHeight;
 
-    return trans4 * rot4 * scale4;
+    return trans * rot * scale;
 }
 
 

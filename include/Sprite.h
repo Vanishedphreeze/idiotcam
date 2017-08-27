@@ -35,6 +35,7 @@ private:
     float mRotateRad = 0;
     Eigen::Vector3f mPos;
     float mWidth = 1, mHeight = 1;
+    void _spriteConstructor();
 
 public:
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW // this is pretty annoying.
@@ -42,23 +43,32 @@ public:
     Sprite();
     Sprite(ShaderProgram* pShaderProgram);
     ~Sprite();
-    void _spriteConstructor();
+
     void draw();
+
     void setColor(Eigen::Vector4f color);
     void setColor(float r, float g, float b, float a);
     Eigen::Vector4f getColor() const;
+
     void setPos(Eigen::Vector3f pos);
     void setPos(float x, float y, float z);
     void incPos(Eigen::Vector3f dPos);
     void incPos(float dx, float dy, float dz);
     Eigen::Vector3f getPos() const;
+
     void setScale(float width, float height);
     void incScale(float dWidth, float dHeight);
+
     float getWidth() const;
     float getHeight() const;
+
     void setAngleByRad(float rad);
     void incAngleByRad(float dRad);
     float getAngleByRad() const;
+
+    void setVisibility(bool flag);
+    bool getVisibility() const;
+
     Eigen::Matrix4f getTransformMatrix();
 };
 

@@ -11,8 +11,10 @@
 #include "BaseManager.h"
 #include "ShaderProgram.h"
 #include "Sprite.h"
+#include "Camera.h"
 
 class Sprite;
+class Camera;
 
 class RenderManager : public BaseManager {
 private:
@@ -41,14 +43,16 @@ private:
     void setupVertexBuffer(); // in a 2D game engine, the only shape we will use is rectangular.
     std::vector<ShaderProgram*> mShaderProgramPool; // this will create tons of dangling pointers. Be careful.
     std::map<int, Sprite*> mRenderQueue;
+    Camera* mDefaultCam; // this could be changed into a queue or anything other.
 
 public:
-    RenderManager() {};
-    ~RenderManager() {};
+    RenderManager() {}
+    ~RenderManager() {}
     void startUp() override;
     void shutDown() override;
-    GLFWwindow* getWindowHandle();
-    ShaderProgram* getDefaultShader(); // this function should be in getDefaultResources
+    GLFWwindow* getWindowHandle() const;
+    ShaderProgram* getDefaultShader() const; // this function should be in getDefaultResources
+    Camera* getDefaultCamera() const;
     int addSpriteToRenderQueue(Sprite* sprite);
     void removeSpriteFromRenderQueue(int index);
     void draw(); // this function would be drawRenderQueue sooner.
