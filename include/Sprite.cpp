@@ -12,10 +12,10 @@ Sprite::Sprite(ShaderProgram* pShaderProgram) {
 }
 
 void Sprite::_spriteConstructor() {
-    mColor << 1, 1, 1, 1;
-    mPos << 0, 0, 0;
-    mWidth = 1;
-    mHeight = 1;
+    mColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+    mPos = glm::vec3(0.0f, 0.0f, 0.0f);
+    mWidth = 1.0f;
+    mHeight = 1.0f;
     mIndex = gRenderManager.addSpriteToRenderQueue(this);
 }
 
@@ -31,13 +31,24 @@ void Sprite::draw() {
     GLint matrixLocation = glGetUniformLocation(pShaderProgram->getShaderProgramLocation(), "uModelTransform");
     GLint VLocation = glGetUniformLocation(pShaderProgram->getShaderProgramLocation(), "uViewTransform");
     GLint PLocation = glGetUniformLocation(pShaderProgram->getShaderProgramLocation(), "uProjectTransform");
-    glUniform4f(colorLocation, mColor(0), mColor(1), mColor(2), mColor(3));
-    glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, getTransformMatrix().data());
-    glUniformMatrix4fv(VLocation, 1, GL_FALSE, curCam->getViewMatrix().data());
-    glUniformMatrix4fv(PLocation, 1, GL_FALSE, curCam->getProjMatrix().data());
+    glUniform4f(colorLocation, mColor.r, mColor.g, mColor.b, mColor.a);
+
+    /*
+    glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, &(getTransformMatrix()[0][0]));
+    glUniformMatrix4fv(VLocation, 1, GL_FALSE, &(curCam->getViewMatrix()[0][0]));
+    glUniformMatrix4fv(PLocation, 1, GL_FALSE, &(curCam->getProjMatrix()[0][0]));
+    */
+
+    glm::mat4 model = getTransformMatrix();
+    glm::mat4 view = curCam->getViewMatrix();
+    glm::mat4 proj = curCam->getProjMatrix();
+    glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, &model[0][0]);
+    glUniformMatrix4fv(VLocation, 1, GL_FALSE, &view[0][0]);
+    glUniformMatrix4fv(PLocation, 1, GL_FALSE, &proj[0][0]);
+
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
-    //Eigen::Vector4f pos4;
+    //glm::vec4 pos4;
     //pos4 << 0.0, 0.0, 0.0, 1.0;
     //std::cout << View << std::endl;
     //std::cout << getTransformMatrix() << std::endl;
@@ -45,37 +56,37 @@ void Sprite::draw() {
     //std::cout << Proj * View * getTransformMatrix() * pos4 << std::endl;
 }
 
-void Sprite::setColor(Eigen::Vector4f color) { // this maybe useless.
+void Sprite::setColor(glm::vec4 color) { // this maybe useless.
     mColor = color;
 }
 
 void Sprite::setColor(float r, float g, float b, float a) {
-    mColor << r, g, b, a;
+    mColor = glm::vec4(r, g, b, a);
 }
 
-Eigen::Vector4f Sprite::getColor() const {
+glm::vec4 Sprite::getColor() const {
     return mColor;
 }
 
-void Sprite::setPos(Eigen::Vector3f pos) {
+void Sprite::setPos(glm::vec3 pos) {
     mPos = pos;
 }
 
 void Sprite::setPos(float x, float y, float z) {
-    mPos << x, y, z;
+    mPos = glm::vec3(x, y, z);
 }
 
-void Sprite::incPos(Eigen::Vector3f dPos) {
+void Sprite::incPos(glm::vec3 dPos) {
     mPos += dPos;
 }
 
 void Sprite::incPos(float dx, float dy, float dz) {
-    mPos(0) += dx;
-    mPos(1) += dy;
-    mPos(2) += dz;
+    mPos.x += dx;
+    mPos.y += dy;
+    mPos.x += dz;
 }
 
-Eigen::Vector3f Sprite::getPos() const {
+glm::vec3 Sprite::getPos() const {
     return mPos;
 }
 
@@ -117,23 +128,15 @@ bool Sprite::getVisibility() const {
     return mVisible;
 }
 
-Eigen::Matrix4f Sprite::getTransformMatrix() {
-    // translate
-    Eigen::Matrix4f trans;
-    trans.setIdentity();
-    trans.block<3, 1>(0, 3) = mPos;
-
-    // rotate
-    Eigen::Matrix4f rot;
-    rot.setIdentity();
-    rot.block<2, 2>(0, 0) << cos(mRotateRad), -sin(mRotateRad), sin(mRotateRad), cos(mRotateRad);
-
-    // scale
-    Eigen::Matrix4f scale;
-    scale.setIdentity();
-    scale.block<2, 2>(0, 0) << mWidth, 0.0, 0.0, mHeight;
-
-    return trans * rot * scale;
+glm::mat4 Sprite::getTransformMatrix() {
+    glm::mat4 trans;
+    trans = glm::mat4(1.0f);
+    trans = glm::translate(trans, mPos);
+    trans = glm::rotate(trans, mRotateRad,  glm::vec3(0.0, 0.0, 1.0));
+    trans = glm::scale(trans, glm::vec3(mWidth, mHeight, 1.0f));
+    return trans;
 }
+
+
 
 

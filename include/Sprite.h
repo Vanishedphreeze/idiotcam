@@ -3,24 +3,10 @@
 
 #pragma once
 
+#include "Predeclare.h"
+
 #include "ShaderProgram.h"
 #include "RenderManager.h"
-
-#ifndef EIGEN
-    #define EIGEN
-    #include <Eigen/Eigen>
-#endif // EIGEN
-
-#ifndef STDLIBRARIES
-    #define STDLIBRARIES
-    #include <iostream>
-    #include <fstream>
-    #include <cstdio>
-    #include <cstring>
-    #include <vector>
-    #include <string>
-    #include <map>
-#endif // STDLIBRARIES
 
 class RenderManager;
 
@@ -29,32 +15,32 @@ extern RenderManager gRenderManager;
 class Sprite {
 private:
     ShaderProgram *pShaderProgram;
-    Eigen::Vector4f mColor;
+    glm::vec4 mColor;
     int mIndex;
     bool mVisible = true;
     float mRotateRad = 0;
-    Eigen::Vector3f mPos;
+    glm::vec3 mPos;
     float mWidth = 1, mHeight = 1;
     void _spriteConstructor();
+    // int priority = 1;  Hint : use both map and multi-map.
 
 public:
-    EIGEN_MAKE_ALIGNED_OPERATOR_NEW // this is pretty annoying.
-    //Eigen::Matrix4f mTransformMatrix; // this will be removed later.
+    // Using one sprite to Initiate another should be allowed.
     Sprite();
     Sprite(ShaderProgram* pShaderProgram);
     ~Sprite();
 
     void draw();
 
-    void setColor(Eigen::Vector4f color);
+    void setColor(glm::vec4 color);
     void setColor(float r, float g, float b, float a);
-    Eigen::Vector4f getColor() const;
+    glm::vec4 getColor() const;
 
-    void setPos(Eigen::Vector3f pos);
+    void setPos(glm::vec3 pos);
     void setPos(float x, float y, float z);
-    void incPos(Eigen::Vector3f dPos);
+    void incPos(glm::vec3 dPos);
     void incPos(float dx, float dy, float dz);
-    Eigen::Vector3f getPos() const;
+    glm::vec3 getPos() const;
 
     void setScale(float width, float height);
     void incScale(float dWidth, float dHeight);
@@ -69,7 +55,7 @@ public:
     void setVisibility(bool flag);
     bool getVisibility() const;
 
-    Eigen::Matrix4f getTransformMatrix();
+    glm::mat4 getTransformMatrix();
 };
 
 #endif // _SPRITE

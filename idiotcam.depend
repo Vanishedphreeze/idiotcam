@@ -1,5 +1,6 @@
 # depslib dependency file v1.0
-1503837515 source:d:\idiotcam\main.cpp
+1509025173 source:d:\idiotcam\main.cpp
+	"include/Predeclare.h"
 	"include/RenderManager.h"
 	"include/Sprite.h"
 
@@ -19,22 +20,14 @@
 	<cstdio>
 	<cstring>
 
-1503838593 d:\idiotcam\include\rendermanager.h
+1504665707 d:\idiotcam\include\rendermanager.h
 	"BaseManager.h"
 	"ShaderProgram.h"
 	"Sprite.h"
 	"Camera.h"
 
-1503485800 d:\idiotcam\include\basemanager.h
-	<GL/glew.h>
-	<GLFW/glfw3.h>
-	<iostream>
-	<fstream>
-	<cstdio>
-	<cstring>
-	<vector>
-	<string>
-	<map>
+1504665707 d:\idiotcam\include\basemanager.h
+	"Predeclare.h"
 
 1499418497 d:\idiotcam\include\scenemanager.h
 	"Object.h"
@@ -42,7 +35,24 @@
 
 1499413268 d:\idiotcam\include\object.h
 
-1503496524 d:\idiotcam\include\shaderprogram.h
+1504665727 d:\idiotcam\include\shaderprogram.h
+	"Predeclare.h"
+
+1503838985 source:d:\idiotcam\include\rendermanager.cpp
+	"RenderManager.h"
+
+1503536813 source:d:\idiotcam\include\shaderprogram.cpp
+	"ShaderProgram.h"
+
+1509024577 source:d:\idiotcam\include\sprite.cpp
+	"Sprite.h"
+
+1509018421 d:\idiotcam\include\sprite.h
+	"Predeclare.h"
+	"ShaderProgram.h"
+	"RenderManager.h"
+
+1509017791 d:\idiotcam\include\predeclare.h
 	<GL/glew.h>
 	<GLFW/glfw3.h>
 	<iostream>
@@ -52,37 +62,17 @@
 	<vector>
 	<string>
 	<map>
-
-1503838593 source:d:\idiotcam\include\rendermanager.cpp
-	"RenderManager.h"
-
-1503536813 source:d:\idiotcam\include\shaderprogram.cpp
-	"ShaderProgram.h"
-
-1503809796 source:d:\idiotcam\include\sprite.cpp
-	"Sprite.h"
-
-1503806427 d:\idiotcam\include\sprite.h
-	"ShaderProgram.h"
-	"RenderManager.h"
-	<Eigen/Eigen>
-	<iostream>
-	<fstream>
-	<cstdio>
-	<cstring>
-	<vector>
-	<string>
-	<map>
-
-1503497403 d:\idiotcam\include\predeclare.h
-	"RenderManager.h"
+	<iomanip>
+	<glm/glm.hpp>
+	<glm/gtc/matrix_transform.hpp>
+	<glm/gtc/type_ptr.hpp>
 
 1503754967 source:d:\idiotcam\camera.cpp
 
-1503838593 d:\idiotcam\include\camera.h
-	<Eigen/Eigen>
+1509021874 d:\idiotcam\include\camera.h
+	"Predeclare.h"
 	"RenderManager.h"
 
-1503837556 source:d:\idiotcam\include\camera.cpp
+1509026038 source:d:\idiotcam\include\camera.cpp
 	"Camera.h"
 

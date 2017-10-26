@@ -3,22 +3,7 @@
 
 #pragma once
 
-#ifndef GLEW_BUILD
-    #define GLEW_BUILD
-    #include <GL/glew.h>
-    #include <GLFW/glfw3.h>
-#endif // GLEW_BUILD
-
-#ifndef STDLIBRARIES
-    #define STDLIBRARIES
-    #include <iostream>
-    #include <fstream>
-    #include <cstdio>
-    #include <cstring>
-    #include <vector>
-    #include <string>
-    #include <map>
-#endif // STDLIBRARIES
+#include "Predeclare.h"
 
 class ShaderProgram {
 private:

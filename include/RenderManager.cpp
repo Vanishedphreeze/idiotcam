@@ -107,7 +107,7 @@ void RenderManager::removeSpriteFromRenderQueue(int index) {
 }
 
 void RenderManager::clearWindow() {
-    glClearColor(0.7f, 0.7f, 0.7f, 1.0f); // set the background to light gray.
+    glClearColor(0.75f, 0.75f, 0.75f, 1.0f); // set the background to light gray.
     glClear(GL_COLOR_BUFFER_BIT);
 }
 

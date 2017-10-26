@@ -1,3 +1,4 @@
+#include "include/Predeclare.h"
 #include "include/RenderManager.h"
 #include "include/Sprite.h"
 
@@ -29,11 +30,38 @@ int main() {
     cam->setBgColor(0, 1, 0, 1);
     cam->setViewport(112, 84, 800, 600);
 
+    double prevTime, curTime, realtimeFPS;
+    const double fixedFPS = 60.0;
+    const double fixedFreshPeriod = 1 / fixedFPS;
+    bool startUp = false;
+
+    std::cout << fixedFreshPeriod << std::endl;
+
     // Gameloop
     while (!glfwWindowShouldClose(gRenderManager.getWindowHandle())) {
         // Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
         glfwPollEvents();
-        gRenderManager.draw();
+
+        curTime = glfwGetTime();
+        if (!startUp || curTime > prevTime + fixedFreshPeriod) {
+            if (startUp) {
+                realtimeFPS = 1 / (curTime - prevTime);
+                std::cout << std::setprecision(5) << realtimeFPS << std::endl;
+            }
+            startUp = true;
+
+            // render
+            gRenderManager.draw();
+            /////////
+
+            // update
+            yellowsq->incAngleByRad(0.01);
+            redsq->incAngleByRad(-0.05);
+            redsq->incPos(0.2, 0.1, 0.0);
+            /////////
+
+            prevTime = curTime;
+        }
     }
 
     gRenderManager.shutDown();
