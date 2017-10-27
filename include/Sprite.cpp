@@ -33,18 +33,18 @@ void Sprite::draw() {
     GLint PLocation = glGetUniformLocation(pShaderProgram->getShaderProgramLocation(), "uProjectTransform");
     glUniform4f(colorLocation, mColor.r, mColor.g, mColor.b, mColor.a);
 
-    /*
     glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, &(getTransformMatrix()[0][0]));
     glUniformMatrix4fv(VLocation, 1, GL_FALSE, &(curCam->getViewMatrix()[0][0]));
     glUniformMatrix4fv(PLocation, 1, GL_FALSE, &(curCam->getProjMatrix()[0][0]));
-    */
 
+    /*
     glm::mat4 model = getTransformMatrix();
     glm::mat4 view = curCam->getViewMatrix();
     glm::mat4 proj = curCam->getProjMatrix();
     glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, &model[0][0]);
     glUniformMatrix4fv(VLocation, 1, GL_FALSE, &view[0][0]);
     glUniformMatrix4fv(PLocation, 1, GL_FALSE, &proj[0][0]);
+    */
 
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
