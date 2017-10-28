@@ -1,30 +1,44 @@
 #include "Scene.h"
 
 void Scene::_mainLoop() {
+    int cntUpdateFrames;
     while (isLoopRunning) {
+        if (glfwWindowShouldClose(gRenderManager.getWindowHandle())) {
+            exitScene();
+            break;
+        }
+        glfwPollEvents();
+
         // Update.
+        cntUpdateFrames = 0;
         mCurTime = glfwGetTime();
         if (mCurTime > mPrevUpdateTime + 1 / FIXED_UPDATE_FPS) {
-            update();
-            //realtimeFPS = 1 / (curTime - prevTime);
-            //std::cout << std::setprecision(5) << realtimeFPS << std::endl;
+            // if lag larger then update frames, update until caught up.
+            mUpdateLagTime += mCurTime - mPrevUpdateTime;
+            while (mUpdateLagTime > 1 / FIXED_UPDATE_FPS) {
+                update();
+                cntUpdateFrames++;
+                mUpdateLagTime -= 1 / FIXED_UPDATE_FPS;
+            }
+            mRealtimeUpdateFPS = cntUpdateFrames / (mCurTime - mPrevUpdateTime);
             mPrevUpdateTime = mCurTime;
         }
 
         // Draw. get current time again for the exact time.
         mCurTime = glfwGetTime();
-        if (mCurTime > mPrevDrawTime + 1 / FIXED_RENDER_FPS) {
+        if (mCurTime > mPrevRenderTime + 1 / FIXED_RENDER_FPS) {
             gRenderManager.draw();
-            //realtimeFPS = 1 / (curTime - prevTime);
-            //std::cout << std::setprecision(5) << realtimeFPS << std::endl;
-            mPrevDrawTime = mCurTime;
+            mRealtimeRenderFPS = 1 / (mCurTime - mPrevRenderTime);
+            mPrevRenderTime = mCurTime;
         }
     }
 }
 
 void Scene::_loopStart() {
-    mPrevUpdateTime = mPrevDrawTime = glfwGetTime();
+    mPrevUpdateTime = mPrevRenderTime = glfwGetTime();
+    mUpdateLagTime = 0;
     isLoopRunning = true;
+    _mainLoop();
 }
 
 void Scene::exitScene() {

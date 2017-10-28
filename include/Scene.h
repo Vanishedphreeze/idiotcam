@@ -16,7 +16,7 @@ class Scene {
 
 private:
     bool isLoopRunning = false;
-    float mPrevDrawTime, mPrevUpdateTime, mCurTime, mRealTimeFPS;
+    float mPrevRenderTime, mPrevUpdateTime, mUpdateLagTime, mCurTime, mRealtimeUpdateFPS, mRealtimeRenderFPS;
     void _mainLoop();
 
 public:

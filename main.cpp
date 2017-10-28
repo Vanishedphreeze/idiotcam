@@ -2,12 +2,25 @@
 #include "include/RenderManager.h"
 #include "include/Sprite.h"
 
-#define PI 3.1415926535897932384626
+#include "testScene.h"
 
 extern RenderManager gRenderManager;
 
 //glEnable(GL_DEPTH_TEST);  // this should be discussed later.
 
+int main () {
+    gRenderManager.startUp();
+    TestScene scene1;
+    scene1.loadScene();
+    scene1.initialize();
+    scene1._loopStart();
+    scene1.unloadScene();
+    gRenderManager.shutDown();
+    return 0;
+}
+
+
+/*
 int main() {
     gRenderManager.startUp();
 
@@ -67,3 +80,4 @@ int main() {
     gRenderManager.shutDown();
     return 0;
 }
+*/
