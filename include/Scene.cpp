@@ -9,6 +9,7 @@ void Scene::_mainLoop() {
         }
         glfwPollEvents();
 
+        // is kind of looping does not update in 60fps accurately.
         // Update.
         cntUpdateFrames = 0;
         mCurTime = glfwGetTime();
@@ -16,6 +17,7 @@ void Scene::_mainLoop() {
             // if lag larger then update frames, update until caught up.
             mUpdateLagTime += mCurTime - mPrevUpdateTime;
             while (mUpdateLagTime > 1 / FIXED_UPDATE_FPS) {
+                gInputManager.updateKeyState();
                 update();
                 cntUpdateFrames++;
                 mUpdateLagTime -= 1 / FIXED_UPDATE_FPS;
@@ -27,7 +29,7 @@ void Scene::_mainLoop() {
         // Draw. get current time again for the exact time.
         mCurTime = glfwGetTime();
         if (mCurTime > mPrevRenderTime + 1 / FIXED_RENDER_FPS) {
-            gRenderManager.draw();
+            gRenderManager.drawRenderQueue();
             mRealtimeRenderFPS = 1 / (mCurTime - mPrevRenderTime);
             mPrevRenderTime = mCurTime;
         }

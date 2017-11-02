@@ -1,6 +1,7 @@
 #include "include/Predeclare.h"
 #include "include/RenderManager.h"
 #include "include/Sprite.h"
+#include "include/InputManager.h"
 
 #include "testScene.h"
 
@@ -10,11 +11,13 @@ extern RenderManager gRenderManager;
 
 int main () {
     gRenderManager.startUp();
+    gInputManager.startUp();
     TestScene scene1;
     scene1.loadScene();
     scene1.initialize();
     scene1._loopStart();
     scene1.unloadScene();
+    gInputManager.shutDown();
     gRenderManager.shutDown();
     return 0;
 }

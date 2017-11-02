@@ -1,5 +1,7 @@
 #include "include/Scene.h"
 
+#pragma once
+
 class TestScene : public Scene {
 private:
     Sprite* redsq;

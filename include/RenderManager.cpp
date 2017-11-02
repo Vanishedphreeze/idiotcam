@@ -24,16 +24,11 @@ void RenderManager::setupVertexBuffer() {
 
 void RenderManager::startUp() {
 
-    mInfo.flags.all = 22;
-
-    // that is equal to
-    /*
     mInfo.flags.fullscreen=0;
     mInfo.flags.vsync=1;
     mInfo.flags.cursor=1;
     mInfo.flags.stereo=0;
     mInfo.flags.debug=1;
-    */
 
     if (!glfwInit()) {
         fprintf(stderr, "Failed to initialize GLFW\n");
@@ -111,7 +106,7 @@ void RenderManager::clearWindow() {
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void RenderManager::draw() {
+void RenderManager::drawRenderQueue() {
     // use glPolygonMode(GL_FRONT_AND_BACK, GL_LINE) to draw wire frame.
     // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL) to set as default.
 

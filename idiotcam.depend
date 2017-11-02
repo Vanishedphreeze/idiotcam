@@ -1,8 +1,9 @@
 # depslib dependency file v1.0
-1509180212 source:d:\idiotcam\main.cpp
+1509599586 source:d:\idiotcam\main.cpp
 	"include/Predeclare.h"
 	"include/RenderManager.h"
 	"include/Sprite.h"
+	"include/InputManager.h"
 	"testScene.h"
 
 1497439316 d:\idiotcam\include\transactionmanager.h
@@ -21,7 +22,7 @@
 	<cstdio>
 	<cstring>
 
-1504665707 d:\idiotcam\include\rendermanager.h
+1509604908 d:\idiotcam\include\rendermanager.h
 	"BaseManager.h"
 	"ShaderProgram.h"
 	"Sprite.h"
@@ -39,7 +40,7 @@
 1504665727 d:\idiotcam\include\shaderprogram.h
 	"Predeclare.h"
 
-1503838985 source:d:\idiotcam\include\rendermanager.cpp
+1509604908 source:d:\idiotcam\include\rendermanager.cpp
 	"RenderManager.h"
 
 1503536813 source:d:\idiotcam\include\shaderprogram.cpp
@@ -53,7 +54,7 @@
 	"ShaderProgram.h"
 	"RenderManager.h"
 
-1509017791 d:\idiotcam\include\predeclare.h
+1509595614 d:\idiotcam\include\predeclare.h
 	<GL/glew.h>
 	<GLFW/glfw3.h>
 	<iostream>
@@ -64,6 +65,7 @@
 	<string>
 	<map>
 	<iomanip>
+	<functional>
 	<glm/glm.hpp>
 	<glm/gtc/matrix_transform.hpp>
 	<glm/gtc/type_ptr.hpp>
@@ -79,16 +81,24 @@
 
 1509074114 source:d:\idiotcam\include\gameloop.cpp
 
-1509180039 source:d:\idiotcam\include\scene.cpp
+1509599220 source:d:\idiotcam\include\scene.cpp
 	"Scene.h"
 
-1509182041 d:\idiotcam\include\scene.h
+1509599855 d:\idiotcam\include\scene.h
 	"Predeclare.h"
 	"RenderManager.h"
+	"InputManager.h"
 
-1509180196 d:\idiotcam\testscene.h
+1509605890 d:\idiotcam\testscene.h
 	"include/Scene.h"
 
-1509180212 source:d:\idiotcam\testscene.cpp
+1509613393 source:d:\idiotcam\testscene.cpp
 	"testScene.h"
+
+1509607661 source:d:\idiotcam\include\inputmanager.cpp
+	"InputManager.h"
+
+1509613412 d:\idiotcam\include\inputmanager.h
+	"BaseManager.h"
+	"RenderManager.h"
 

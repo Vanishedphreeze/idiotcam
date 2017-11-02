@@ -5,11 +5,13 @@
 
 #include "Predeclare.h"
 #include "RenderManager.h"
+#include "InputManager.h"
 
 #define FIXED_UPDATE_FPS 60.0
 #define FIXED_RENDER_FPS 60.0
 
 extern RenderManager gRenderManager;
+extern InputManager gInputManager;
 
 class Scene {
     // Do put resources, objects, cameras, etc into recourse map as much as possible.

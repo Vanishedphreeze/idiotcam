@@ -27,15 +27,12 @@ private:
         int majorVersion = 4;
         int minorVersion = 3;
         int samples = 1;
-        union {
-            struct {
-                unsigned int    fullscreen  : 1;
-                unsigned int    vsync       : 1;
-                unsigned int    cursor      : 1;
-                unsigned int    stereo      : 1;
-                unsigned int    debug       : 1;
-            };
-            unsigned int        all;
+        struct {
+            unsigned int    fullscreen  : 1;
+            unsigned int    vsync       : 1;
+            unsigned int    cursor      : 1;
+            unsigned int    stereo      : 1;
+            unsigned int    debug       : 1;
         } flags;
     } mInfo;
 
@@ -56,7 +53,7 @@ public:
     int addSpriteToRenderQueue(Sprite* sprite);
     void clearWindow();
     void removeSpriteFromRenderQueue(int index);
-    void draw(); // this function would be drawRenderQueue sooner.
+    void drawRenderQueue();
 };
 
 #endif // _RENDERMANAGER

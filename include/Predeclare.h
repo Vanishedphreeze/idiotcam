@@ -19,6 +19,7 @@
     #include <string>
     #include <map>
     #include <iomanip>
+    #include <functional>
 #endif // STDLIBRARIES
 
 //    #ifndef EIGEN

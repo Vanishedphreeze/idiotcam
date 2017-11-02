@@ -22,13 +22,16 @@ void TestScene::initialize() {
     Camera* cam = gRenderManager.getDefaultCamera();
     cam->setBgColor(0, 1, 0, 1);
     cam->setViewport(112, 84, 800, 600);
-
 }
 
 void TestScene::update() {
     yellowsq->incAngleByRad(0.01);
     redsq->incAngleByRad(-0.05);
     redsq->incPos(0.2, 0.1, 0.0);
+    if (gInputManager.isKeyClicked(InputManager::KEYBOARD_W)) yellowsq->incPos( 0.0, 5.0, 0.0);
+    if (gInputManager.isKeyReleased(InputManager::KEYBOARD_S)) yellowsq->incPos( 0.0,-5.0, 0.0);
+    if (gInputManager.isKeyPressed(InputManager::KEYBOARD_A)) yellowsq->incPos(-0.2, 0.0, 0.0);
+    if (gInputManager.isKeyPressed(InputManager::KEYBOARD_D)) yellowsq->incPos( 0.2, 0.0, 0.0);
 }
 
 void TestScene::unloadScene() {

@@ -34,6 +34,8 @@
 		<Unit filename="include/BaseManager.h" />
 		<Unit filename="include/Camera.cpp" />
 		<Unit filename="include/Camera.h" />
+		<Unit filename="include/InputManager.cpp" />
+		<Unit filename="include/InputManager.h" />
 		<Unit filename="include/Predeclare.h" />
 		<Unit filename="include/RenderManager.cpp" />
 		<Unit filename="include/RenderManager.h" />
@@ -44,6 +46,8 @@
 		<Unit filename="include/Sprite.cpp" />
 		<Unit filename="include/Sprite.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="testScene.cpp" />
+		<Unit filename="testScene.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
