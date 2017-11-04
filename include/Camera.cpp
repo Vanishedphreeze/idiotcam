@@ -7,6 +7,7 @@ Camera::Camera(glm::vec3 eyepos, float wcwidth) {
     _setupViewport();
 }
 
+
 Camera::Camera(float xEye, float yEye, float zEye, float wcwidth) {
     mWCEyePos = glm::vec3(xEye, yEye, zEye);
     mWCWidth = wcwidth;
@@ -19,7 +20,7 @@ void Camera::_setupViewport() {
     glScissor(mViewportXPos, mViewportYPos, mViewportWidth, mViewportHeight);
 }
 
-void Camera::clearCamera() {
+void Camera::clearCamera() const {
     glClearColor(mBgColor.r, mBgColor.g, mBgColor.b, mBgColor.a);
     glEnable(GL_SCISSOR_TEST);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -62,13 +63,17 @@ glm::vec3 Camera::getWCEyePos() const {
     return mWCEyePos;
 }
 
+/*
 void Camera::setZFarPlane(float zfar) {
     mZFar = zfar;
 }
+*/
 
+/*
 float Camera::getZFarPlane() const {
     return mZFar;
 }
+*/
 
 void Camera::setWCWidth(float width) {
     mWCWidth = width;

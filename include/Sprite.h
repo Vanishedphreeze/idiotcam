@@ -9,6 +9,7 @@
 #include "RenderManager.h"
 
 class RenderManager;
+class Camera;
 
 extern RenderManager gRenderManager;
 
@@ -30,7 +31,7 @@ public:
     Sprite(ShaderProgram* pShaderProgram);
     ~Sprite();
 
-    void draw();
+    void draw(const Camera& camera);
 
     void setColor(glm::vec4 color);
     void setColor(float r, float g, float b, float a);

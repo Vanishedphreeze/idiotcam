@@ -11,14 +11,13 @@ void RenderManager::setupVertexBuffer() {
     };
     glGenVertexArrays(1, &mVAO);
     glGenBuffers(1, &mVBO);
-    // Bind the Vertex Array Object first, then bind and set vertex buffer(s) and attribute pointer(s).
     glBindVertexArray(mVAO);
     glBindBuffer(GL_ARRAY_BUFFER, mVBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*) 0);
     glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0); // Note that this is allowed, the call to glVertexAttribPointer registered VBO as the currently bound vertex buffer object so afterwards we can safely unbind
-    glBindVertexArray(0); // Unbind VAO (it's always a good thing to unbind any buffer/array to prevent strange bugs)
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
 }
 
 
@@ -66,7 +65,7 @@ void RenderManager::startUp() {
     ShaderProgram* simpleShader = new ShaderProgram("shaders/simpleVS.vert", "shaders/simpleFS.frag");
     mShaderProgramPool.push_back(simpleShader);
 
-    mDefaultCam = new Camera(0, 0, 1, 100);
+    //mDefaultCam = new Camera(0, 0, 1, 100);
 }
 
 
@@ -88,9 +87,11 @@ ShaderProgram* RenderManager::getDefaultShader() const {
     return mShaderProgramPool[0];
 }
 
+/*
 Camera* RenderManager::getDefaultCamera() const {
     return mDefaultCam;
 }
+*/
 
 int RenderManager::addSpriteToRenderQueue(Sprite* sprite) {
     mRenderQueue.insert(std::pair<int, Sprite*> (mSpriteIndexCounter, sprite));
@@ -101,19 +102,19 @@ void RenderManager::removeSpriteFromRenderQueue(int index) {
     mRenderQueue.erase(index);
 }
 
-void RenderManager::clearWindow() {
+void RenderManager::clearWindow() const {
     glClearColor(0.75f, 0.75f, 0.75f, 1.0f); // set the background to light gray.
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void RenderManager::drawRenderQueue() {
+void RenderManager::drawRenderQueue(const Camera& camera) const {
     // use glPolygonMode(GL_FRONT_AND_BACK, GL_LINE) to draw wire frame.
     // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL) to set as default.
 
     // Render
     // Clear the colorbuffer
     clearWindow();
-    (getDefaultCamera())->clearCamera();
+    camera.clearCamera();
 
     // what will happen if i don't unbind the VAO after draw?
 
@@ -121,7 +122,7 @@ void RenderManager::drawRenderQueue() {
     glBindVertexArray(mVAO);
     //(mShaderProgramPool[0])->activate(); // Optimize. if the shader program is the same as the former one, then THIS is not necessary.
     for (auto i=mRenderQueue.begin(); i!=mRenderQueue.end(); ++i) {
-        if ((*i).second->getVisibility()) (*i).second->draw();
+        if ((*i).second->getVisibility()) (*i).second->draw(camera);
     }
     glBindVertexArray(0);
 

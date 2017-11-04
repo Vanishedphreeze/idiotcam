@@ -34,15 +34,15 @@ void InputManager::updateKeyState() {
     }
 }
 
-bool InputManager::isKeyClicked(const int key) const {
+bool InputManager::isKeyClicked(const Keyboard_code key) const {
     if (key >= 0 && key <= GLFW_KEY_LAST) return mIsKeyClicked[key]; else return false;
 }
 
-bool InputManager::isKeyPressed(const int key) const {
+bool InputManager::isKeyPressed(const Keyboard_code key) const {
     if (key >= 0 && key <= GLFW_KEY_LAST) return mIsKeyPressed[key]; else return false;
 }
 
-bool InputManager::isKeyReleased(const int key) const {
+bool InputManager::isKeyReleased(const Keyboard_code key) const {
     if (key >= 0 && key <= GLFW_KEY_LAST) return mIsKeyReleased[key]; else return false;
 }
 

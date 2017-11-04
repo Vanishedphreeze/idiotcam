@@ -29,7 +29,7 @@ void Scene::_mainLoop() {
         // Draw. get current time again for the exact time.
         mCurTime = glfwGetTime();
         if (mCurTime > mPrevRenderTime + 1 / FIXED_RENDER_FPS) {
-            gRenderManager.drawRenderQueue();
+            gRenderManager.drawRenderQueue(defaultCamera);
             mRealtimeRenderFPS = 1 / (mCurTime - mPrevRenderTime);
             mPrevRenderTime = mCurTime;
         }
@@ -41,6 +41,10 @@ void Scene::_loopStart() {
     mUpdateLagTime = 0;
     isLoopRunning = true;
     _mainLoop();
+}
+
+void Scene::setNextScene(const Scene& scene) {
+
 }
 
 void Scene::exitScene() {

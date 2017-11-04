@@ -1,9 +1,10 @@
 # depslib dependency file v1.0
-1509599586 source:d:\idiotcam\main.cpp
+1509790391 source:d:\idiotcam\main.cpp
 	"include/Predeclare.h"
 	"include/RenderManager.h"
 	"include/Sprite.h"
 	"include/InputManager.h"
+	"include/SceneManager.h"
 	"testScene.h"
 
 1497439316 d:\idiotcam\include\transactionmanager.h
@@ -22,7 +23,7 @@
 	<cstdio>
 	<cstring>
 
-1509604908 d:\idiotcam\include\rendermanager.h
+1509788392 d:\idiotcam\include\rendermanager.h
 	"BaseManager.h"
 	"ShaderProgram.h"
 	"Sprite.h"
@@ -31,30 +32,30 @@
 1504665707 d:\idiotcam\include\basemanager.h
 	"Predeclare.h"
 
-1499418497 d:\idiotcam\include\scenemanager.h
-	"Object.h"
-	"BaseManager.h"
+1509795125 d:\idiotcam\include\scenemanager.h
+	"Scene.h"
+	"StartScene.h"
 
 1499413268 d:\idiotcam\include\object.h
 
 1504665727 d:\idiotcam\include\shaderprogram.h
 	"Predeclare.h"
 
-1509604908 source:d:\idiotcam\include\rendermanager.cpp
+1509788411 source:d:\idiotcam\include\rendermanager.cpp
 	"RenderManager.h"
 
 1503536813 source:d:\idiotcam\include\shaderprogram.cpp
 	"ShaderProgram.h"
 
-1509072589 source:d:\idiotcam\include\sprite.cpp
+1509788267 source:d:\idiotcam\include\sprite.cpp
 	"Sprite.h"
 
-1509018421 d:\idiotcam\include\sprite.h
+1509788276 d:\idiotcam\include\sprite.h
 	"Predeclare.h"
 	"ShaderProgram.h"
 	"RenderManager.h"
 
-1509595614 d:\idiotcam\include\predeclare.h
+1509790000 d:\idiotcam\include\predeclare.h
 	<GL/glew.h>
 	<GLFW/glfw3.h>
 	<iostream>
@@ -66,25 +67,26 @@
 	<map>
 	<iomanip>
 	<functional>
+	<memory>
 	<glm/glm.hpp>
 	<glm/gtc/matrix_transform.hpp>
 	<glm/gtc/type_ptr.hpp>
 
 1503754967 source:d:\idiotcam\camera.cpp
 
-1509021874 d:\idiotcam\include\camera.h
+1509789247 d:\idiotcam\include\camera.h
 	"Predeclare.h"
 	"RenderManager.h"
 
-1509026038 source:d:\idiotcam\include\camera.cpp
+1509789071 source:d:\idiotcam\include\camera.cpp
 	"Camera.h"
 
 1509074114 source:d:\idiotcam\include\gameloop.cpp
 
-1509599220 source:d:\idiotcam\include\scene.cpp
+1509788450 source:d:\idiotcam\include\scene.cpp
 	"Scene.h"
 
-1509599855 d:\idiotcam\include\scene.h
+1509795200 d:\idiotcam\include\scene.h
 	"Predeclare.h"
 	"RenderManager.h"
 	"InputManager.h"
@@ -92,13 +94,24 @@
 1509605890 d:\idiotcam\testscene.h
 	"include/Scene.h"
 
-1509613393 source:d:\idiotcam\testscene.cpp
+1509788823 source:d:\idiotcam\testscene.cpp
 	"testScene.h"
 
-1509607661 source:d:\idiotcam\include\inputmanager.cpp
+1509686100 source:d:\idiotcam\include\inputmanager.cpp
 	"InputManager.h"
 
-1509613412 d:\idiotcam\include\inputmanager.h
+1509686388 d:\idiotcam\include\inputmanager.h
 	"BaseManager.h"
 	"RenderManager.h"
+
+1509790231 source:d:\idiotcam\include\scenemanager.cpp
+	"SceneManager.h"
+
+1509786665 source:d:\idiotcam\startscene.cpp
+
+1509790144 d:\idiotcam\include\startscene.h
+	"Scene.h"
+
+1509789380 source:d:\idiotcam\include\startscene.cpp
+	"StartScene.h"
 

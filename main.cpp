@@ -2,13 +2,30 @@
 #include "include/RenderManager.h"
 #include "include/Sprite.h"
 #include "include/InputManager.h"
+#include "include/SceneManager.h"
 
 #include "testScene.h"
 
 extern RenderManager gRenderManager;
+extern InputManager gInputManager;
+extern SceneManager gSceneManager;
 
 //glEnable(GL_DEPTH_TEST);  // this should be discussed later.
 
+int main () {
+    gRenderManager.startUp();
+    gInputManager.startUp();
+    gSceneManager.startUp();
+
+    gSceneManager.runScene();
+
+    gSceneManager.shutDown();
+    gInputManager.shutDown();
+    gRenderManager.shutDown();
+}
+
+
+/*
 int main () {
     gRenderManager.startUp();
     gInputManager.startUp();
@@ -21,66 +38,5 @@ int main () {
     gRenderManager.shutDown();
     return 0;
 }
-
-
-/*
-int main() {
-    gRenderManager.startUp();
-
-    Sprite* redsq = new Sprite();
-    Sprite* yellowsq = new Sprite();
-
-    // initialization
-    redsq->setColor(1, 0, 0, 0);
-    yellowsq->setColor(1, 1, 0, 0);
-
-    redsq->setPos(-15, -5, 0);
-    redsq->setScale(25, 40);
-    redsq->setAngleByRad(PI / 6);
-
-    yellowsq->setPos(20, 10, 0);
-    yellowsq->setScale(30, 30);
-    yellowsq->setAngleByRad(PI / 4);
-
-    Camera* cam = gRenderManager.getDefaultCamera();
-    cam->setBgColor(0, 1, 0, 1);
-    cam->setViewport(112, 84, 800, 600);
-
-    double prevTime, curTime, realtimeFPS;
-    const double fixedFPS = 60.0;
-    const double fixedFreshPeriod = 1 / fixedFPS;
-    bool startUp = false;
-
-    std::cout << fixedFreshPeriod << std::endl;
-
-    // Gameloop
-    while (!glfwWindowShouldClose(gRenderManager.getWindowHandle())) {
-        // Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
-        glfwPollEvents();
-
-        curTime = glfwGetTime();
-        if (!startUp || curTime > prevTime + fixedFreshPeriod) {
-            if (startUp) {
-                realtimeFPS = 1 / (curTime - prevTime);
-                std::cout << std::setprecision(5) << realtimeFPS << std::endl;
-            }
-            startUp = true;
-
-            // render
-            gRenderManager.draw();
-            /////////
-
-            // update
-            yellowsq->incAngleByRad(0.01);
-            redsq->incAngleByRad(-0.05);
-            redsq->incPos(0.2, 0.1, 0.0);
-            /////////
-
-            prevTime = curTime;
-        }
-    }
-
-    gRenderManager.shutDown();
-    return 0;
-}
 */
+

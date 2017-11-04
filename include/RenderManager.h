@@ -49,11 +49,11 @@ public:
     void shutDown() override;
     GLFWwindow* getWindowHandle() const;
     ShaderProgram* getDefaultShader() const; // this function should be in getDefaultResources
-    Camera* getDefaultCamera() const;
+    //Camera* getDefaultCamera() const;
     int addSpriteToRenderQueue(Sprite* sprite);
-    void clearWindow();
+    void clearWindow() const;
     void removeSpriteFromRenderQueue(int index);
-    void drawRenderQueue();
+    void drawRenderQueue(const Camera& camera) const;
 };
 
 #endif // _RENDERMANAGER

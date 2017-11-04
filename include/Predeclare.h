@@ -20,6 +20,7 @@
     #include <map>
     #include <iomanip>
     #include <functional>
+    #include <memory>
 #endif // STDLIBRARIES
 
 //    #ifndef EIGEN

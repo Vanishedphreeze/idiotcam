@@ -23,9 +23,9 @@ Sprite::~Sprite() {
     gRenderManager.removeSpriteFromRenderQueue(mIndex);
 }
 
-void Sprite::draw() {
+void Sprite::draw(const Camera& camera) {
     pShaderProgram->activate();
-    Camera* curCam = gRenderManager.getDefaultCamera();
+    //Camera* camera = ??? //gRenderManager.getDefaultCamera();
 
     GLint colorLocation = glGetUniformLocation(pShaderProgram->getShaderProgramLocation(), "uPixelColor");
     GLint matrixLocation = glGetUniformLocation(pShaderProgram->getShaderProgramLocation(), "uModelTransform");
@@ -34,13 +34,13 @@ void Sprite::draw() {
     glUniform4f(colorLocation, mColor.r, mColor.g, mColor.b, mColor.a);
 
     glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, &(getTransformMatrix()[0][0]));
-    glUniformMatrix4fv(VLocation, 1, GL_FALSE, &(curCam->getViewMatrix()[0][0]));
-    glUniformMatrix4fv(PLocation, 1, GL_FALSE, &(curCam->getProjMatrix()[0][0]));
+    glUniformMatrix4fv(VLocation, 1, GL_FALSE, &(camera.getViewMatrix()[0][0]));
+    glUniformMatrix4fv(PLocation, 1, GL_FALSE, &(camera.getProjMatrix()[0][0]));
 
     /*
     glm::mat4 model = getTransformMatrix();
-    glm::mat4 view = curCam->getViewMatrix();
-    glm::mat4 proj = curCam->getProjMatrix();
+    glm::mat4 view = camera->getViewMatrix();
+    glm::mat4 proj = camera->getProjMatrix();
     glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, &model[0][0]);
     glUniformMatrix4fv(VLocation, 1, GL_FALSE, &view[0][0]);
     glUniformMatrix4fv(PLocation, 1, GL_FALSE, &proj[0][0]);

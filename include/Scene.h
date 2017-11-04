@@ -13,6 +13,8 @@
 extern RenderManager gRenderManager;
 extern InputManager gInputManager;
 
+class Camera;
+
 class Scene {
     // Do put resources, objects, cameras, etc into recourse map as much as possible.
 
@@ -22,13 +24,14 @@ private:
     void _mainLoop();
 
 public:
-
-    Scene() {}
+    Camera defaultCamera;
+    Scene() : defaultCamera(0, 0, 1, 100) {}
     virtual ~Scene() {}
     virtual void loadScene() = 0; // for loading resources
     virtual void initialize() = 0; // for initialize
     void _loopStart(); // for starting the scene(loop). this is not available to users.
     virtual void update() = 0; // this is called once per frame.
+    void setNextScene(const Scene& scene);
     void exitScene(); // for exiting from scene and move into next scene. this can be directly called by users.
     virtual void unloadScene() = 0; // for unloading resources
 

@@ -11,13 +11,13 @@
     The WC is based on right-handed system.
     Z-axis's Positive direction is normal to the screen towards user.
     The observer is on position mWCEyePos.
-    Anything whose Z-position is larger than observer's will not be shown.
+    // Anything whose Z-position is larger than observer's will not be shown.
 */
 
 class Camera { // the camera can not rotate now
 private:
     glm::vec3 mWCEyePos;
-    float mZFar = -1000.0;
+    //float mZFar = -1000.0;
     float mWCWidth;
     int mViewportXPos = 0, mViewportYPos = 0; // In pixel. same as mWiewportWidth / Height
     int mViewportWidth = WINDOW_WIDTH, mViewportHeight = WINDOW_HEIGHT;
@@ -31,7 +31,7 @@ public:
     Camera(float xEye, float yEye, float zEye, float wcwidth);
     ~Camera();
 
-    void clearCamera();
+    void clearCamera() const;
 
     void setBgColor(glm::vec4 color);
     void setBgColor(float r, float g, float b, float a);
@@ -41,8 +41,8 @@ public:
     void setWCEyePos(float x, float y, float z);
     void incWCEyePos(glm::vec3 dPos);
     void incWCEyePos(float dx, float dy, float dz);
-    void setZFarPlane(float zfar);
-    float getZFarPlane() const;
+    //void setZFarPlane(float zfar);
+    //float getZFarPlane() const;
 
     glm::vec3 getWCEyePos() const;
 

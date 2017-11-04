@@ -1,13 +1,13 @@
-#include "testScene.h"
+#include "StartScene.h"
 
 #define PI 3.1415926535897932384626
 
-void TestScene::loadScene() {
+void StartScene::loadScene() {
     redsq = new Sprite();
     yellowsq = new Sprite();
 }
 
-void TestScene::initialize() {
+void StartScene::initialize() {
     redsq->setColor(1, 0, 0, 0);
     yellowsq->setColor(1, 1, 0, 0);
 
@@ -23,7 +23,7 @@ void TestScene::initialize() {
     defaultCamera.setViewport(112, 84, 800, 600);
 }
 
-void TestScene::update() {
+void StartScene::update() {
     yellowsq->incAngleByRad(0.01);
     redsq->incAngleByRad(-0.05);
     redsq->incPos(0.2, 0.1, 0.0);
@@ -34,12 +34,12 @@ void TestScene::update() {
     if (gInputManager.isKeyPressed(InputManager::KEYBOARD_ESCAPE)) exitScene();
 }
 
-void TestScene::unloadScene() {
+void StartScene::unloadScene() {
     delete redsq;
     delete yellowsq;
 }
 
-TestScene::~TestScene() {
+StartScene::~StartScene() {
     if (redsq != NULL) delete redsq;
     if (yellowsq != NULL) delete yellowsq;
 }
