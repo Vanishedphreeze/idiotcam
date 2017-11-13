@@ -16,11 +16,11 @@ void Sprite::_spriteConstructor() {
     mPos = glm::vec3(0.0f, 0.0f, 0.0f);
     mWidth = 1.0f;
     mHeight = 1.0f;
-    mIndex = gRenderManager.addSpriteToRenderQueue(this);
+    //mIndex = gRenderManager.addSpriteToRenderQueue(this);
 }
 
 Sprite::~Sprite() {
-    gRenderManager.removeSpriteFromRenderQueue(mIndex);
+    //gRenderManager.removeSpriteFromRenderQueue(mIndex);
 }
 
 void Sprite::draw(const Camera& camera) {
@@ -46,6 +46,8 @@ void Sprite::draw(const Camera& camera) {
     glUniformMatrix4fv(PLocation, 1, GL_FALSE, &proj[0][0]);
     */
 
+    // use glPolygonMode(GL_FRONT_AND_BACK, GL_LINE) to draw wire frame.
+    // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL) to set as default.
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
     //glm::vec4 pos4;

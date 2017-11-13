@@ -17,7 +17,7 @@ void RenderManager::setupVertexBuffer() {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*) 0);
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArray(0);
+    glBindVertexArray(mVAO);
 }
 
 
@@ -70,6 +70,8 @@ void RenderManager::startUp() {
 
 
 void RenderManager::shutDown() {
+    glBindVertexArray(0);
+
     // Properly de-allocate all resources once they've outlived their purpose
     glDeleteVertexArrays(1, &mVAO);
     glDeleteBuffers(1, &mVBO);
@@ -93,6 +95,7 @@ Camera* RenderManager::getDefaultCamera() const {
 }
 */
 
+/*
 int RenderManager::addSpriteToRenderQueue(Sprite* sprite) {
     mRenderQueue.insert(std::pair<int, Sprite*> (mSpriteIndexCounter, sprite));
     return mSpriteIndexCounter++;
@@ -119,15 +122,17 @@ void RenderManager::drawRenderQueue(const Camera& camera) const {
     // what will happen if i don't unbind the VAO after draw?
 
     // Draw
-    glBindVertexArray(mVAO);
+    // bind/unbind VAO is now in startup/shutdown.
+
     //(mShaderProgramPool[0])->activate(); // Optimize. if the shader program is the same as the former one, then THIS is not necessary.
     for (auto i=mRenderQueue.begin(); i!=mRenderQueue.end(); ++i) {
         if ((*i).second->getVisibility()) (*i).second->draw(camera);
     }
-    glBindVertexArray(0);
+
 
     // Swap the screen buffers
     glfwSwapBuffers(mGameWindowHandle);
 }
+*/
 
 RenderManager gRenderManager;

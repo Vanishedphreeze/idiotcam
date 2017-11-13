@@ -47,6 +47,8 @@
 		<Unit filename="include/ShaderProgram.h" />
 		<Unit filename="include/Sprite.cpp" />
 		<Unit filename="include/Sprite.h" />
+		<Unit filename="include/StartScene.cpp" />
+		<Unit filename="include/StartScene.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="testScene.cpp" />
 		<Unit filename="testScene.h" />

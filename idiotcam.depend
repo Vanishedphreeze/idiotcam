@@ -23,7 +23,7 @@
 	<cstdio>
 	<cstring>
 
-1509788392 d:\idiotcam\include\rendermanager.h
+1510554536 d:\idiotcam\include\rendermanager.h
 	"BaseManager.h"
 	"ShaderProgram.h"
 	"Sprite.h"
@@ -41,13 +41,13 @@
 1504665727 d:\idiotcam\include\shaderprogram.h
 	"Predeclare.h"
 
-1509788411 source:d:\idiotcam\include\rendermanager.cpp
+1510553969 source:d:\idiotcam\include\rendermanager.cpp
 	"RenderManager.h"
 
 1503536813 source:d:\idiotcam\include\shaderprogram.cpp
 	"ShaderProgram.h"
 
-1509788267 source:d:\idiotcam\include\sprite.cpp
+1510553827 source:d:\idiotcam\include\sprite.cpp
 	"Sprite.h"
 
 1509788276 d:\idiotcam\include\sprite.h
@@ -83,10 +83,10 @@
 
 1509074114 source:d:\idiotcam\include\gameloop.cpp
 
-1509788450 source:d:\idiotcam\include\scene.cpp
+1510554459 source:d:\idiotcam\include\scene.cpp
 	"Scene.h"
 
-1509795200 d:\idiotcam\include\scene.h
+1510554534 d:\idiotcam\include\scene.h
 	"Predeclare.h"
 	"RenderManager.h"
 	"InputManager.h"
@@ -112,6 +112,6 @@
 1509790144 d:\idiotcam\include\startscene.h
 	"Scene.h"
 
-1509789380 source:d:\idiotcam\include\startscene.cpp
+1510554446 source:d:\idiotcam\include\startscene.cpp
 	"StartScene.h"
 

@@ -8,6 +8,9 @@ void StartScene::loadScene() {
 }
 
 void StartScene::initialize() {
+    addSpriteToRenderQueue(redsq);
+    addSpriteToRenderQueue(yellowsq);
+
     redsq->setColor(1, 0, 0, 0);
     yellowsq->setColor(1, 1, 0, 0);
 

@@ -14,6 +14,7 @@ extern RenderManager gRenderManager;
 extern InputManager gInputManager;
 
 class Camera;
+class Sprite;
 
 class Scene {
     // Do put resources, objects, cameras, etc into recourse map as much as possible.
@@ -21,6 +22,8 @@ class Scene {
 private:
     bool isLoopRunning = false;
     float mPrevRenderTime, mPrevUpdateTime, mUpdateLagTime, mCurTime, mRealtimeUpdateFPS, mRealtimeRenderFPS;
+    std::map<int, Sprite*> mRenderQueue;
+    int mSpriteIndexCounter = 0;
     void _mainLoop();
 
 public:
@@ -34,6 +37,11 @@ public:
     void setNextScene(const Scene& scene);
     void exitScene(); // for exiting from scene and move into next scene. this can be directly called by users.
     virtual void unloadScene() = 0; // for unloading resources
+
+    int addSpriteToRenderQueue(Sprite* sprite);
+    void clearWindow() const;
+    void removeSpriteFromRenderQueue(int index);
+    void drawRenderQueue(const Camera& camera) const;
 
     // load/unload resources should be done automatically by engine. this should be discussed later.
     // Important

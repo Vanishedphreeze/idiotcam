@@ -29,7 +29,7 @@ void Scene::_mainLoop() {
         // Draw. get current time again for the exact time.
         mCurTime = glfwGetTime();
         if (mCurTime > mPrevRenderTime + 1 / FIXED_RENDER_FPS) {
-            gRenderManager.drawRenderQueue(defaultCamera);
+            drawRenderQueue(defaultCamera);
             mRealtimeRenderFPS = 1 / (mCurTime - mPrevRenderTime);
             mPrevRenderTime = mCurTime;
         }
@@ -49,4 +49,35 @@ void Scene::setNextScene(const Scene& scene) {
 
 void Scene::exitScene() {
     isLoopRunning = false;
+}
+
+int Scene::addSpriteToRenderQueue(Sprite* sprite) {
+    mRenderQueue.insert(std::pair<int, Sprite*> (mSpriteIndexCounter, sprite));
+    return mSpriteIndexCounter++;
+}
+
+void Scene::removeSpriteFromRenderQueue(int index) {
+    mRenderQueue.erase(index);
+}
+
+void Scene::clearWindow() const {
+    glClearColor(0.75f, 0.75f, 0.75f, 1.0f); // set the background to light gray.
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void Scene::drawRenderQueue(const Camera& camera) const {
+    // Render
+    // Clear the colorbuffer
+    clearWindow();
+    camera.clearCamera();
+
+    // Draw
+    // bind/unbind VAO is now in startup/shutdown.
+    //(mShaderProgramPool[0])->activate(); // Optimize. if the shader program is the same as the former one, then THIS is not necessary.
+    for (auto i=mRenderQueue.begin(); i!=mRenderQueue.end(); ++i) {
+        if ((*i).second->getVisibility()) (*i).second->draw(camera);
+    }
+
+    // Swap the screen buffers
+    glfwSwapBuffers(gRenderManager.getWindowHandle());
 }
