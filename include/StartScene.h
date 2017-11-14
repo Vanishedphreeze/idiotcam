@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "Predeclare.h"
+
 class StartScene : public Scene {
 private:
     Sprite* redsq;

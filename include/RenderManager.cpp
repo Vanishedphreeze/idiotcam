@@ -18,6 +18,8 @@ void RenderManager::setupVertexBuffer() {
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(mVAO);
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LEQUAL);
 }
 
 
@@ -88,51 +90,5 @@ GLFWwindow* RenderManager::getWindowHandle() const {
 ShaderProgram* RenderManager::getDefaultShader() const {
     return mShaderProgramPool[0];
 }
-
-/*
-Camera* RenderManager::getDefaultCamera() const {
-    return mDefaultCam;
-}
-*/
-
-/*
-int RenderManager::addSpriteToRenderQueue(Sprite* sprite) {
-    mRenderQueue.insert(std::pair<int, Sprite*> (mSpriteIndexCounter, sprite));
-    return mSpriteIndexCounter++;
-}
-
-void RenderManager::removeSpriteFromRenderQueue(int index) {
-    mRenderQueue.erase(index);
-}
-
-void RenderManager::clearWindow() const {
-    glClearColor(0.75f, 0.75f, 0.75f, 1.0f); // set the background to light gray.
-    glClear(GL_COLOR_BUFFER_BIT);
-}
-
-void RenderManager::drawRenderQueue(const Camera& camera) const {
-    // use glPolygonMode(GL_FRONT_AND_BACK, GL_LINE) to draw wire frame.
-    // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL) to set as default.
-
-    // Render
-    // Clear the colorbuffer
-    clearWindow();
-    camera.clearCamera();
-
-    // what will happen if i don't unbind the VAO after draw?
-
-    // Draw
-    // bind/unbind VAO is now in startup/shutdown.
-
-    //(mShaderProgramPool[0])->activate(); // Optimize. if the shader program is the same as the former one, then THIS is not necessary.
-    for (auto i=mRenderQueue.begin(); i!=mRenderQueue.end(); ++i) {
-        if ((*i).second->getVisibility()) (*i).second->draw(camera);
-    }
-
-
-    // Swap the screen buffers
-    glfwSwapBuffers(mGameWindowHandle);
-}
-*/
 
 RenderManager gRenderManager;

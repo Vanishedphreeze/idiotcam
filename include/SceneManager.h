@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "BaseManager.h"
 #include "Scene.h"
 #include "StartScene.h"
 

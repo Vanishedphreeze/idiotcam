@@ -10,8 +10,6 @@ extern RenderManager gRenderManager;
 extern InputManager gInputManager;
 extern SceneManager gSceneManager;
 
-//glEnable(GL_DEPTH_TEST);  // this should be discussed later.
-
 int main () {
     gRenderManager.startUp();
     gInputManager.startUp();

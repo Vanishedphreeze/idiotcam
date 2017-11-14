@@ -1,5 +1,5 @@
 #include "Sprite.h"
-
+#include "Scene.h"
 
 Sprite::Sprite() {
     this->pShaderProgram = gRenderManager.getDefaultShader();
@@ -16,7 +16,6 @@ void Sprite::_spriteConstructor() {
     mPos = glm::vec3(0.0f, 0.0f, 0.0f);
     mWidth = 1.0f;
     mHeight = 1.0f;
-    //mIndex = gRenderManager.addSpriteToRenderQueue(this);
 }
 
 Sprite::~Sprite() {

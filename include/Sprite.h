@@ -4,12 +4,14 @@
 #pragma once
 
 #include "Predeclare.h"
-
 #include "ShaderProgram.h"
 #include "RenderManager.h"
+#include "Camera.h"
+#include "Scene.h"
 
 class RenderManager;
 class Camera;
+class Scene;
 
 extern RenderManager gRenderManager;
 
@@ -17,7 +19,7 @@ class Sprite {
 private:
     ShaderProgram *pShaderProgram;
     glm::vec4 mColor;
-    int mIndex;
+
     bool mVisible = true;
     float mRotateRad = 0;
     glm::vec3 mPos;
@@ -30,6 +32,9 @@ public:
     Sprite();
     Sprite(ShaderProgram* pShaderProgram);
     ~Sprite();
+
+    // this should't be public
+    int mIndex;
 
     void draw(const Camera& camera);
 

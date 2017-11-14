@@ -39,6 +39,8 @@
 		<Unit filename="include/Predeclare.h" />
 		<Unit filename="include/RenderManager.cpp" />
 		<Unit filename="include/RenderManager.h" />
+		<Unit filename="include/ResourceManager.cpp" />
+		<Unit filename="include/ResourceManager.h" />
 		<Unit filename="include/Scene.cpp" />
 		<Unit filename="include/Scene.h" />
 		<Unit filename="include/SceneManager.cpp" />

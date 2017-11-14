@@ -6,6 +6,8 @@
 #include "Predeclare.h"
 #include "RenderManager.h"
 #include "InputManager.h"
+#include "Camera.h"
+#include "Sprite.h"
 
 #define FIXED_UPDATE_FPS 60.0
 #define FIXED_RENDER_FPS 60.0
@@ -19,12 +21,15 @@ class Sprite;
 class Scene {
     // Do put resources, objects, cameras, etc into recourse map as much as possible.
 
+
 private:
     bool isLoopRunning = false;
     float mPrevRenderTime, mPrevUpdateTime, mUpdateLagTime, mCurTime, mRealtimeUpdateFPS, mRealtimeRenderFPS;
-    std::map<int, Sprite*> mRenderQueue;
+    std::map<int, Sprite&> mRenderQueue;
     int mSpriteIndexCounter = 0;
     void _mainLoop();
+    void clearWindow() const;
+    void drawRenderQueue(const Camera& camera) const;
 
 public:
     Camera defaultCamera;
@@ -38,10 +43,8 @@ public:
     void exitScene(); // for exiting from scene and move into next scene. this can be directly called by users.
     virtual void unloadScene() = 0; // for unloading resources
 
-    int addSpriteToRenderQueue(Sprite* sprite);
-    void clearWindow() const;
-    void removeSpriteFromRenderQueue(int index);
-    void drawRenderQueue(const Camera& camera) const;
+    int addSpriteToRenderQueue(Sprite& sprite);
+    void removeSpriteFromRenderQueue(Sprite& sprite);
 
     // load/unload resources should be done automatically by engine. this should be discussed later.
     // Important

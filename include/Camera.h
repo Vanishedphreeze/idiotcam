@@ -2,7 +2,6 @@
 #define _CAMERA
 
 #include "Predeclare.h"
-
 #include "RenderManager.h"
 
 #pragma once
@@ -13,6 +12,8 @@
     The observer is on position mWCEyePos.
     // Anything whose Z-position is larger than observer's will not be shown.
 */
+
+//use glDepthRange (nearNormDepth, farNormalDepth);
 
 class Camera { // the camera can not rotate now
 private:

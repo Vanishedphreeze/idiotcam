@@ -115,3 +115,108 @@
 1510554446 source:d:\idiotcam\include\startscene.cpp
 	"StartScene.h"
 
+1509789071 source:d:\myprojects\idiotcam\include\camera.cpp
+	"Camera.h"
+
+1510652087 d:\myprojects\idiotcam\include\camera.h
+	"Predeclare.h"
+	"RenderManager.h"
+
+1509790000 d:\myprojects\idiotcam\include\predeclare.h
+	<GL/glew.h>
+	<GLFW/glfw3.h>
+	<iostream>
+	<fstream>
+	<cstdio>
+	<cstring>
+	<vector>
+	<string>
+	<map>
+	<iomanip>
+	<functional>
+	<memory>
+	<glm/glm.hpp>
+	<glm/gtc/matrix_transform.hpp>
+	<glm/gtc/type_ptr.hpp>
+
+1510644730 d:\myprojects\idiotcam\include\rendermanager.h
+	"BaseManager.h"
+	"ShaderProgram.h"
+
+1504665707 d:\myprojects\idiotcam\include\basemanager.h
+	"Predeclare.h"
+
+1504665727 d:\myprojects\idiotcam\include\shaderprogram.h
+	"Predeclare.h"
+
+1510651236 d:\myprojects\idiotcam\include\sprite.h
+	"Predeclare.h"
+	"ShaderProgram.h"
+	"RenderManager.h"
+	"Camera.h"
+	"Scene.h"
+
+1509686100 source:d:\myprojects\idiotcam\include\inputmanager.cpp
+	"InputManager.h"
+
+1510643862 d:\myprojects\idiotcam\include\inputmanager.h
+	"BaseManager.h"
+	"RenderManager.h"
+
+1510651893 source:d:\myprojects\idiotcam\include\rendermanager.cpp
+	"RenderManager.h"
+
+1510651910 source:d:\myprojects\idiotcam\include\scene.cpp
+	"Scene.h"
+	"Sprite.h"
+
+1510647404 d:\myprojects\idiotcam\include\scene.h
+	"Predeclare.h"
+	"RenderManager.h"
+	"InputManager.h"
+	"Camera.h"
+	"Sprite.h"
+
+1509790231 source:d:\myprojects\idiotcam\include\scenemanager.cpp
+	"SceneManager.h"
+
+1510643975 d:\myprojects\idiotcam\include\scenemanager.h
+	"BaseManager.h"
+	"Scene.h"
+	"StartScene.h"
+
+1510643757 d:\myprojects\idiotcam\include\startscene.h
+	"Scene.h"
+	"Predeclare.h"
+
+1503536813 source:d:\myprojects\idiotcam\include\shaderprogram.cpp
+	"ShaderProgram.h"
+
+1510648620 source:d:\myprojects\idiotcam\include\sprite.cpp
+	"Sprite.h"
+	"Scene.h"
+
+1510651971 source:d:\myprojects\idiotcam\include\startscene.cpp
+	"StartScene.h"
+
+1509790391 source:d:\myprojects\idiotcam\main.cpp
+	"include/Predeclare.h"
+	"include/RenderManager.h"
+	"include/Sprite.h"
+	"include/InputManager.h"
+	"include/SceneManager.h"
+	"testScene.h"
+
+1509605890 d:\myprojects\idiotcam\testscene.h
+	"include/Scene.h"
+
+1509788823 source:d:\myprojects\idiotcam\testscene.cpp
+	"testScene.h"
+
+1510641504 source:d:\myprojects\idiotcam\include\resourcemanager.cpp
+	"ResourceManager.h"
+
+1510643757 d:\myprojects\idiotcam\include\resourcemanager.h
+	"Predeclare.h"
+	"BaseManager.h"
+

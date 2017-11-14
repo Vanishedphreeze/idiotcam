@@ -8,8 +8,8 @@ void StartScene::loadScene() {
 }
 
 void StartScene::initialize() {
-    addSpriteToRenderQueue(redsq);
-    addSpriteToRenderQueue(yellowsq);
+    addSpriteToRenderQueue(*redsq);
+    addSpriteToRenderQueue(*yellowsq);
 
     redsq->setColor(1, 0, 0, 0);
     yellowsq->setColor(1, 1, 0, 0);
@@ -18,7 +18,7 @@ void StartScene::initialize() {
     redsq->setScale(25, 40);
     redsq->setAngleByRad(PI / 6);
 
-    yellowsq->setPos(20, 10, 0);
+    yellowsq->setPos(20, 10, 0.1);
     yellowsq->setScale(30, 30);
     yellowsq->setAngleByRad(PI / 4);
 
@@ -38,11 +38,16 @@ void StartScene::update() {
 }
 
 void StartScene::unloadScene() {
+    // remove the object from render queue before delete
+    removeSpriteFromRenderQueue(*redsq);
+    removeSpriteFromRenderQueue(*yellowsq);
     delete redsq;
     delete yellowsq;
 }
 
 StartScene::~StartScene() {
-    if (redsq != NULL) delete redsq;
-    if (yellowsq != NULL) delete yellowsq;
+    removeSpriteFromRenderQueue(*redsq);
+    removeSpriteFromRenderQueue(*yellowsq);
+    delete redsq;
+    delete yellowsq;
 }
