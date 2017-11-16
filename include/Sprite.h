@@ -7,11 +7,9 @@
 #include "ShaderProgram.h"
 #include "RenderManager.h"
 #include "Camera.h"
-#include "Scene.h"
 
 class RenderManager;
 class Camera;
-class Scene;
 
 extern RenderManager gRenderManager;
 
@@ -19,11 +17,11 @@ class Sprite {
 private:
     ShaderProgram *pShaderProgram;
     glm::vec4 mColor;
-
     bool mVisible = true;
     float mRotateRad = 0;
     glm::vec3 mPos;
     float mWidth = 1, mHeight = 1;
+
     void _spriteConstructor();
     // int priority = 1;  Hint : use both map and multi-map.
 
@@ -31,12 +29,9 @@ public:
     // Using one sprite to Initiate another should be allowed.
     Sprite();
     Sprite(ShaderProgram* pShaderProgram);
+    Sprite(const Sprite& sprite);
     ~Sprite();
-
-    // this should't be public
-    int mIndex;
-
-    void draw(const Camera& camera);
+    void draw(const Camera& camera) const;
 
     void setColor(glm::vec4 color);
     void setColor(float r, float g, float b, float a);
@@ -61,7 +56,7 @@ public:
     void setVisibility(bool flag);
     bool getVisibility() const;
 
-    glm::mat4 getTransformMatrix();
+    glm::mat4 getTransformMatrix() const;
 };
 
 #endif // _SPRITE

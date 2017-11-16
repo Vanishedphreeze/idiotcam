@@ -25,11 +25,16 @@ class Scene {
 private:
     bool isLoopRunning = false;
     float mPrevRenderTime, mPrevUpdateTime, mUpdateLagTime, mCurTime, mRealtimeUpdateFPS, mRealtimeRenderFPS;
-    std::map<int, Sprite&> mRenderQueue;
+    // std::map<int, Sprite> mRenderQueue;
+    // value: safe, but slower.
+    // reference: faster, but more difficult to use, causes bugs if careless.
+    // E.g. a sprite is deleted before draw.
+
     int mSpriteIndexCounter = 0;
     void _mainLoop();
+    void _drawScene() const;
     void clearWindow() const;
-    void drawRenderQueue(const Camera& camera) const;
+    //void drawRenderQueue(const Camera& camera) const;
 
 public:
     Camera defaultCamera;
@@ -39,12 +44,13 @@ public:
     virtual void initialize() = 0; // for initialize
     void _loopStart(); // for starting the scene(loop). this is not available to users.
     virtual void update() = 0; // this is called once per frame.
+    virtual void drawScene() const = 0;
     void setNextScene(const Scene& scene);
     void exitScene(); // for exiting from scene and move into next scene. this can be directly called by users.
     virtual void unloadScene() = 0; // for unloading resources
 
-    int addSpriteToRenderQueue(Sprite& sprite);
-    void removeSpriteFromRenderQueue(Sprite& sprite);
+    //int addSpriteToRenderQueue(Sprite& sprite);
+    //void removeSpriteFromRenderQueue(Sprite& sprite);
 
     // load/unload resources should be done automatically by engine. this should be discussed later.
     // Important

@@ -1,5 +1,4 @@
 #include "Sprite.h"
-#include "Scene.h"
 
 Sprite::Sprite() {
     this->pShaderProgram = gRenderManager.getDefaultShader();
@@ -9,6 +8,14 @@ Sprite::Sprite() {
 Sprite::Sprite(ShaderProgram* pShaderProgram) {
     this->pShaderProgram = pShaderProgram;
     _spriteConstructor();
+}
+
+Sprite::Sprite(const Sprite& sprite) {
+    this->pShaderProgram = sprite.pShaderProgram;
+    mColor = sprite.mColor;
+    mPos = sprite.mPos;
+    mWidth = sprite.mWidth;
+    mHeight = sprite.mHeight;
 }
 
 void Sprite::_spriteConstructor() {
@@ -22,7 +29,7 @@ Sprite::~Sprite() {
     //gRenderManager.removeSpriteFromRenderQueue(mIndex);
 }
 
-void Sprite::draw(const Camera& camera) {
+void Sprite::draw(const Camera& camera) const {
     pShaderProgram->activate();
     //Camera* camera = ??? //gRenderManager.getDefaultCamera();
 
@@ -129,7 +136,7 @@ bool Sprite::getVisibility() const {
     return mVisible;
 }
 
-glm::mat4 Sprite::getTransformMatrix() {
+glm::mat4 Sprite::getTransformMatrix() const {
     glm::mat4 trans;
     trans = glm::mat4(1.0f);
     trans = glm::translate(trans, mPos);

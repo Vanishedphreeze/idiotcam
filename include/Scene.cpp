@@ -1,5 +1,4 @@
 #include "Scene.h"
-#include "Sprite.h"
 
 void Scene::_mainLoop() {
     int cntUpdateFrames;
@@ -30,11 +29,26 @@ void Scene::_mainLoop() {
         // Draw. get current time again for the exact time.
         mCurTime = glfwGetTime();
         if (mCurTime > mPrevRenderTime + 1 / FIXED_RENDER_FPS) {
-            drawRenderQueue(defaultCamera);
+            //drawRenderQueue(defaultCamera);
+            _drawScene();
             mRealtimeRenderFPS = 1 / (mCurTime - mPrevRenderTime);
             mPrevRenderTime = mCurTime;
         }
     }
+}
+
+void Scene::_drawScene() const {
+    // Render
+    // Clear the colorbuffer
+    clearWindow();
+
+    // Draw
+    // bind/unbind VAO is now in startup/shutdown.
+    //(mShaderProgramPool[0])->activate(); // Optimize. if the shader program is the same as the former one, then THIS is not necessary.
+    drawScene();
+
+    // Swap the screen buffers
+    glfwSwapBuffers(gRenderManager.getWindowHandle());
 }
 
 void Scene::_loopStart() {
@@ -52,14 +66,18 @@ void Scene::exitScene() {
     isLoopRunning = false;
 }
 
+/*
 int Scene::addSpriteToRenderQueue(Sprite& sprite) {
     mRenderQueue.insert(std::pair<int, Sprite&> (mSpriteIndexCounter, sprite));
     return sprite.mIndex = mSpriteIndexCounter++;
 }
+*/
 
+/*
 void Scene::removeSpriteFromRenderQueue(Sprite& sprite) {
     mRenderQueue.erase(sprite.mIndex);
 }
+*/
 
 void Scene::clearWindow() const {
     glClearColor(0.75f, 0.75f, 0.75f, 1.0f); // set the background to light gray.
@@ -67,6 +85,7 @@ void Scene::clearWindow() const {
     glClear(GL_DEPTH_BUFFER_BIT);
 }
 
+/*
 void Scene::drawRenderQueue(const Camera& camera) const {
     // Render
     // Clear the colorbuffer
@@ -76,10 +95,11 @@ void Scene::drawRenderQueue(const Camera& camera) const {
     // Draw
     // bind/unbind VAO is now in startup/shutdown.
     //(mShaderProgramPool[0])->activate(); // Optimize. if the shader program is the same as the former one, then THIS is not necessary.
-    for (auto i=mRenderQueue.begin(); i!=mRenderQueue.end(); ++i) { // first: index, second: Sprite&
-        if ((*i).second.getVisibility()) (*i).second.draw(camera);
-    }
+    //for (auto i=mRenderQueue.begin(); i!=mRenderQueue.end(); ++i) { // first: index, second: Sprite&
+        //if ((*i).second.getVisibility()) (*i).second.draw(camera);
+    //}
 
     // Swap the screen buffers
     glfwSwapBuffers(gRenderManager.getWindowHandle());
 }
+*/
